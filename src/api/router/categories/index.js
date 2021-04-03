@@ -1,13 +1,12 @@
 const express = require('express');
-const {Category} = require('../../../domain/models');
+const {getCategoryNamesOfStoreProducts} = require('../../../domain/queries/categories');
 
 const categories = express();
 
 categories
-  .get('/', async (req, res, next) => {
+  .get('/store-products', async (req, res, next) => {
     try {
-      console.log('here');
-      const data = await Category.findSpecialData();
+      const data = await getCategoryNamesOfStoreProducts();
       res.json(data);
     } catch (error) {
       next(error);

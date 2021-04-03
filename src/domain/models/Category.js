@@ -10,10 +10,8 @@ module.exports = (Sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
-    timestamps: true,
+    timestamps: false,
   });
-
-  Category.findSpecialData = async () => Sequelize.query('SELECT * FROM `Categories`', { type: Sequelize.QueryTypes.SELECT});
 
   return Category;
 };

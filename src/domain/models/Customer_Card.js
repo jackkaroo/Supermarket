@@ -37,7 +37,7 @@ module.exports = (Sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
-    timestamps: true,
+    timestamps: false,
   });
 
   Customer_Card.associate = (models) => {

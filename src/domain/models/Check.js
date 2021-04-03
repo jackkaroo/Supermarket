@@ -13,11 +13,11 @@ module.exports = (Sequelize, DataTypes) => {
       allowNull: true,
     },
     print_date: {
-      type: DataTypes.DECIMAL(13, 4),
+      type: DataTypes.DATE,
       allowNull: false,
     },
     sum_total: {
-      type: DataTypes.DATE,
+      type: DataTypes.DECIMAL(13, 4),
       allowNull: false,
     },
     vat: {
@@ -25,7 +25,7 @@ module.exports = (Sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
-    timestamps: true,
+    timestamps: false,
   });
 
   Check.associate = (models) => {

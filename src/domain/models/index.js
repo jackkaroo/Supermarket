@@ -37,6 +37,15 @@ db.Sequelize = Sequelize;
 //   force: true,
 // }).then(async () => {
 //   await require('../seeders/categories')(db);
+//
+//   await require('../seeders/products')(db);
+//   await require('../seeders/store_products')(db);
+//
+//   await require('../seeders/employees')(db);
+//   await require('../seeders/customer_cards')(db);
+//
+//   await require('../seeders/checks')(db);
+//   await require('../seeders/sales')(db);
 // });
 
 module.exports = db;

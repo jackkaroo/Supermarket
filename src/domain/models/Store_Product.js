@@ -25,7 +25,7 @@ module.exports = (Sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
-    timestamps: true,
+    timestamps: false,
   });
 
   Store_Product.associate = (models) => {

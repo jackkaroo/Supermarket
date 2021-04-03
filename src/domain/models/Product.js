@@ -18,7 +18,7 @@ module.exports = (Sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
-    timestamps: true,
+    timestamps: false,
   });
 
   Product.associate = (models) => {

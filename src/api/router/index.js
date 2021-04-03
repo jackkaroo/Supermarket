@@ -7,6 +7,14 @@ index
     '/categories',
     require('./categories'),
   )
+  .use(
+    '/sales',
+    require('./sales'),
+  )
+  .use(
+    '/checks',
+    require('./checks'),
+  )
 ;
 
 module.exports = index;
