@@ -1,6 +1,6 @@
 const {sequelize} = require('../models');
 
-// all checks of employees
+// all checks of customers
 const getChecksOfEmployees = () => {
   return sequelize.query(
     'SELECT Employees.empl_surname, Employees.id_employee, COUNT (DISTINCT (Checks.check_number)) AS checks ' +

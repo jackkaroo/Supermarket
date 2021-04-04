@@ -7,7 +7,7 @@ const {
 const checks = express();
 
 checks
-  .get('/employees', async (req, res, next) => {
+  .get('/customers', async (req, res, next) => {
     try {
       const data = await getChecksOfEmployees();
       res.json(data);
@@ -15,7 +15,7 @@ checks
       next(error);
     }
   })
-  .get('/employees/:id_employee', async (req, res, next) => {
+  .get('/customers/:id_employee', async (req, res, next) => {
     try {
       const {id_employee} = req.params;
       const data = await getChecksOfEmployee(id_employee);
