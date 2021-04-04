@@ -24,5 +24,13 @@ module.exports = async function(db) {
       sum_total: 1200 + (1200 * 0.2) / 1.2,
       vat: (1200 * 0.2) / 1.2,
     },
+    {
+      check_number: 4,
+      id_employee: 'id_empl_1',
+      card_number: 'card_number_3',
+      print_date: '2021-05-3',
+      sum_total: 1200 + (1200 * 0.2) / 1.2,
+      vat: (1200 * 0.2) / 1.2,
+    },
   ]);
 };

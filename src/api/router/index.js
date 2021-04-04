@@ -19,6 +19,10 @@ index
     '/customers',
     require('./customers'),
   )
+  .use(
+    '/employees',
+    require('./employees'),
+  )
 ;
 
 module.exports = index;

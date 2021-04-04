@@ -12,7 +12,35 @@ const getCustomersHighPaidEmployees = () => {
   );
 }
 
+/*
+Користувачі які підписували чек з усіма працівниками з роллю
+seller і тільки з ними*/
+
+const getCustomersCheckWithSeller = () => {
+  return sequelize.query(
+    'SELECT Customer_Cards.card_number, Customer_Cards.cust_surname, Customer_Cards.cust_name  ' +
+    'FROM Customer_Cards ' +
+    'WHERE NOT EXISTS ( ' +
+    'Select * FROM Checks Where id_employee IN (' +
+    'SELECT id_employee From Employees Where role = "seller"' +
+    'AND id_employee NOT IN (' +
+    'SELECT id_employee From Checks Where Customer_Cards.card_number = Checks.card_number' +
+    ') '+
+    ')' +
+    ')' +
+    'AND NOT EXISTS (' +
+    'Select * From Checks Where Customer_Cards.card_number = Checks.card_number ' +
+    'AND id_employee NOT IN (' +
+    'SELECT id_employee From Employees Where role = "seller" ' +
+    ')' +
+    ')' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
 module.exports = {
-  getCustomersHighPaidEmployees,
+  getCustomersHighPaidEmployees,getCustomersCheckWithSeller
 };
+
 

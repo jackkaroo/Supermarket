@@ -41,7 +41,7 @@ db.Sequelize = Sequelize;
 //   await require('../seeders/products')(db);
 //   await require('../seeders/store_products')(db);
 //
-//   await require('../seeders/customers')(db);
+//   await require('../seeders/employees')(db);
 //   await require('../seeders/customer_cards')(db);
 //
 //   await require('../seeders/checks')(db);

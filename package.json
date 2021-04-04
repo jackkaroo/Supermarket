@@ -1,7 +1,6 @@
 {
   "name": "kolesnyk_supermarket",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,5 +15,15 @@
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
     "sequelize": "^6.6.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TobiMaxKenobi/Supermarket.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TobiMaxKenobi/Supermarket/issues"
+  },
+  "homepage": "https://github.com/TobiMaxKenobi/Supermarket#readme",
+  "description": ""
 }

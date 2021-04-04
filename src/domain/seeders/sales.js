@@ -24,5 +24,11 @@ module.exports = async function(db) {
       product_number: 40,
       selling_price: 40*30, // 40 upc_3 products sold for 30 dollars each
     },
+    {
+      UPC: 'upc_1',
+      check_number: 4,
+      product_number:20,
+      selling_price: 20*10, // 40 upc_3 products sold for 30 dollars each
+    },
   ]);
 };
