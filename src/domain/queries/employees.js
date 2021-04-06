@@ -1,6 +1,6 @@
 const {sequelize} = require('../models');
 
-// get name of employeers who has check with more than 3 customer
+//
 const getEmployeesCheckCustomerKyiv = () => {
   return sequelize.query(
     'SELECT Employees.id_employee, empl_surname, empl_name ' +

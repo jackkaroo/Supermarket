@@ -1,9 +1,11 @@
 const {sequelize} = require('../models');
 
-// get names of customers and employees that had checks signed by customers with salary over 10 000
+// get names of customers and employees that had checks signed
+// by customers with salary over 10 000
+// покупці які мають чек з продавцями з зарплатою більше 10 000
 const getCustomersHighPaidEmployees = () => {
   return sequelize.query(
-    'SELECT DISTINCT (Customer_Cards.cust_surname), Employees.empl_surname ' +
+    'SELECT DISTINCT (Customer_Cards.card_number), cust_surname, cust_name ' +
     'FROM (Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee) ' +
     'INNER JOIN Customer_Cards ON Customer_Cards.card_number = Checks.card_number ' +
     'WHERE Employees.salary > 10000 ' +

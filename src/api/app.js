@@ -11,10 +11,10 @@ app.use(bodyParser.json({limit: '3mb'}));
 
 app.use('/api', require('./router'));
 
-app.get('/', (req, res) => {
-  fs.readFile(__dirname + '/public/client.html', 'utf8', (err, text) => {
-    res.send(text);
-  });
-});
+// app.get('/', (req, res) => {
+//   fs.readFile(__dirname + '/public/client.html', 'utf8', (err, text) => {
+//     res.send(text);
+//   });
+// });
 
 module.exports = app;

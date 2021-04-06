@@ -16,7 +16,6 @@
     "nodemon": "^2.0.7",
     "sequelize": "^6.6.2"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TobiMaxKenobi/Supermarket.git"

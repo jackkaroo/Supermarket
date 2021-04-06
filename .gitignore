@@ -2,3 +2,4 @@ node_modules
 .idea
 .db_data
 .vscode
+client/.gitignore
