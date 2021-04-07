@@ -1,0 +1,11 @@
+.header-show {
+    display: block;
+}
+
+.header-hide {
+    display: none;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
