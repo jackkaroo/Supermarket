@@ -35,6 +35,10 @@ index
     '/manager',
     require('./manager'),
   )
+  .use(
+    '/seller',
+    require('./seller'),
+  )
 ;
 
 module.exports = index;

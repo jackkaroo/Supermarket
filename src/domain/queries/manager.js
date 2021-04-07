@@ -13,7 +13,7 @@ const getListSellers = () => {
 }
 
 /*-	Скласти список товарів, що належать певній категорії, відсортованих за назвою;*/
-const getProductsByCategory = (name) => {
+const getProductsByCategorySorted = (name) => {
   return sequelize.query(
     'SELECT * ' +
     'FROM Categories INNER JOIN Products ON Products.category_number = Categories.category_number ' +
@@ -52,6 +52,17 @@ const getAllCategories = () => {
     'SELECT *' +
     'FROM Categories ' +
     'ORDER BY category_name ' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+/*6.	6.	Скласти список всіх товарів, що належать певній категорії:*/
+const getProductsByCategory = (name) => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Categories INNER JOIN Products ON Products.category_number = Categories.category_number ' +
+    'WHERE Categories.category_name = ' + `'${name}' ` +
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );
@@ -156,6 +167,6 @@ module.exports = {
   getListSellers, getProductsByCategory, getPhoneAddressByEmployee, getAllProducts, getAllCategories,
   getStoreProductsByProduct, getPriceQuantityByUPC,getChecksBySellerByTime,getInfoByCheck,
   getChecksByAllSellerByTime, getCustomersPibPhoneAddress,getCustomersByPercent,
-  getInfoByUpc
+  getInfoByUpc, getProductsByCategorySorted
 };
 

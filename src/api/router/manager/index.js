@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  getListSellers,
+  getListSellers,getProductsByCategorySorted,
   getProductsByCategory, getCustomersPibPhoneAddress,
   getPhoneAddressByEmployee, getChecksByAllSellerByTime,
   getAllProducts, getInfoByCheck, getCustomersByPercent,
@@ -21,15 +21,24 @@ manager
     }
   })
 
-  .get('/products-by-category/:name', async (req, res, next) => {
+  .get('/products-by-category-sorted/:name', async (req, res, next) => {
     try {
       const {name} = req.params;
-      const data = await getProductsByCategory(name);
+      const data = await getProductsByCategorySorted(name);
       res.json(data);
     } catch (error) {
       next(error);
     }
   })
+.get('/products-by-category/:name', async (req, res, next) => {
+  try {
+    const {name} = req.params;
+    const data = await getProductsByCategory(name);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+})
   .get('/phone-address-by-employee/:surname', async (req, res, next) => {
     try {
       const {surname} = req.params;
