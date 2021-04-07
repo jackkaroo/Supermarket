@@ -1,5 +1,25 @@
 const {sequelize} = require('../models');
 
+const findEmployeeById = (id) => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Employees ' +
+    'WHERE Employees.id_employee = ' + `'${id}' ` +
+    'LIMIT 1;',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+const findEmployeeByEmail = (email) => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Employees ' +
+    'WHERE Employees.email = ' + `'${email}' ` +
+    'LIMIT 1;',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
 const getEmployees = () => {
   return sequelize.query(
     'SELECT *' +
@@ -42,6 +62,10 @@ const getEmployeesCheckCustomerKyiv = () => {
 }
 
 module.exports = {
-  getEmployeesCheckCustomerKyiv, getEmployees, deleteEmployee
+  getEmployeesCheckCustomerKyiv,
+  getEmployees,
+  deleteEmployee,
+  findEmployeeByEmail,
+  findEmployeeById,
 };
 

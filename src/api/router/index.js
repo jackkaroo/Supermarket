@@ -1,14 +1,22 @@
 const express = require('express');
+const {employeeJwtMiddleware, managerMiddleware} = require('../middlewares/auth')
 
 const index = express();
 
 index
   .use(
+    '/auth',
+    require('./auth'),
+  )
+  .use(
     '/categories',
+    employeeJwtMiddleware,
+    managerMiddleware,
     require('./categories'),
   )
   .use(
     '/sales',
+    employeeJwtMiddleware,
     require('./sales'),
   )
   .use(

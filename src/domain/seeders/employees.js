@@ -2,6 +2,8 @@ module.exports = async function(db) {
   await db.Employee.bulkCreate([
     {
       id_employee: 'id_empl_1' ,
+      email: '1',
+      password: '1',
       empl_surname: 'Podopryhora',
       empl_name: 'Polina',
       empl_patronymic: 'Romanivna' ,
@@ -16,6 +18,8 @@ module.exports = async function(db) {
     },
     {
       id_employee: 'id_empl_2' ,
+      email: '2',
+      password: '2',
       empl_surname: 'Malyar',
       empl_name: 'Nastya',
       empl_patronymic: 'Vitaliivna' ,
@@ -30,6 +34,8 @@ module.exports = async function(db) {
     },
     {
       id_employee: 'id_empl_3' ,
+      email: '3',
+      password: '3',
       empl_surname: 'Babenich',
       empl_name: 'Dima',
       empl_patronymic: 'Viktorovich' ,
