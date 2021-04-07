@@ -12,7 +12,7 @@ const getEmployees = () => {
 const deleteEmployee = (id) => {
   console.log(id)
   return sequelize.query(
-    `DELETE FROM Employees WHERE Employees.id_employee=${id}` +
+    'DELETE FROM Employees WHERE Employees.id_employee = ' + `'${id}' ` +
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );

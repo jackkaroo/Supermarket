@@ -31,6 +31,10 @@ index
     '/store-products',
     require('./store-products'),
   )
+  .use(
+    '/manager',
+    require('./manager'),
+  )
 ;
 
 module.exports = index;

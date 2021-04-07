@@ -19,7 +19,7 @@ module.exports = async function(db) {
       empl_surname: 'Malyar',
       empl_name: 'Nastya',
       empl_patronymic: 'Vitaliivna' ,
-      role: 'admin',
+      role: 'manager',
       salary: 13000 ,
       date_of_birth: '2001-01-19' ,
       date_of_start:  '2020-09-21',
