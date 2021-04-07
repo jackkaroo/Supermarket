@@ -20,8 +20,8 @@ export default function StoreProduct( {product, index}) {
       <td>{product.products_number}</td>
       <td>{product.promotional_product}</td>
       <td>
-        <img className="icon" src="https://imgur.com/gsqALsZ.png" onClick={editStoreProduct} />
-        <img className="icon" src="https://imgur.com/ypHqYP0.png" onClick={deleteStoreProduct}/>
+        <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={editStoreProduct} />
+        <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteStoreProduct}/>
       </td>
     </tr>
   );

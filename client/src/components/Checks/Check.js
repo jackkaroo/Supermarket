@@ -18,8 +18,8 @@ export default function Check( {check, index}) {
       <td>{check.sum_total}</td>
       <td>{check.vat}</td>
       <td>
-        <img className="icon" src="https://imgur.com/gsqALsZ.png" onClick={editCheck} />
-        <img className="icon" src="https://imgur.com/ypHqYP0.png" onClick={deleteCheck}/>
+        <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={editCheck} />
+        <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteCheck}/>
       </td>
     </tr>
   );

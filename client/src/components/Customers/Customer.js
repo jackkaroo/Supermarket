@@ -21,8 +21,8 @@ export default function Customer( {customer, index}) {
       <td>{customer.zip_code}</td>
       <td>{customer.percent}</td>
       <td>
-        <img className="icon" src="https://imgur.com/gsqALsZ.png" onClick={editCustomer} alt=""/>
-        <img className="icon" src="https://imgur.com/ypHqYP0.png" onClick={deleteCustomer} alt=""/>
+        <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={editCustomer}/>
+        <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteCustomer}/>
       </td>
     </tr>
   );

@@ -18,8 +18,8 @@ export default function Product( {product, index}) {
       <td>{product.product_name}</td>
       <td>{product.characteristics}</td>
       <td>
-        <img className="icon" src="https://imgur.com/gsqALsZ.png" onClick={editProduct} />
-        <img className="icon" src="https://imgur.com/ypHqYP0.png" onClick={deleteProduct}/>
+        <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={editProduct} />
+        <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteProduct}/>
       </td>
     </tr>
   );

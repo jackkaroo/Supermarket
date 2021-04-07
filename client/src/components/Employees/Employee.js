@@ -27,8 +27,8 @@ export default function Employee( {employee, index}) {
       <td>{employee.street}</td>
       <td>{employee.zip_code}</td>
       <td>
-        <img className="icon" src="https://imgur.com/gsqALsZ.png" onClick={editEmployee} />
-        <img className="icon" src="https://imgur.com/ypHqYP0.png" onClick={deleteEmployee}/>
+        <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={editEmployee} />
+        <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteEmployee}/>
       </td>
     </tr>
   );

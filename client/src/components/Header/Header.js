@@ -7,6 +7,7 @@ import Products from "../Products/Products"
 import StoreProducts from "../StoreProducts/StoreProducts"
 import Checks from "../Checks/Checks"
 import Customers from "../Customers/Customers"
+import Manager from "../Manager/Manager"
 
 export default function Header() {
   return (
@@ -36,6 +37,12 @@ export default function Header() {
               <li>
                 <Link to="/customers">Client Cards</Link>
               </li>
+              <li>
+                <Link to="/manager">Manager</Link>
+              </li>
+              <li>
+                <Link to="/seller">Seller</Link>
+              </li>
             </ul>
           </nav>
 
@@ -56,6 +63,12 @@ export default function Header() {
               <Checks />
             </Route>
             <Route path="/customers">
+              <Customers />
+            </Route>
+            <Route path="/manager">
+              <Manager />
+            </Route>
+            <Route path="/seller">
               <Customers />
             </Route>
             <Route path="/">
