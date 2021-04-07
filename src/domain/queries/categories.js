@@ -1,6 +1,16 @@
 const {sequelize} = require('../models');
 
 // get names of all categories that have store products
+const getCategories = () => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Categories' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+// get names of all categories that have store products
 const getCategoryNamesOfStoreProducts = () => {
   return sequelize.query(
     'SELECT DISTINCT (Categories.category_name) ' +
@@ -12,6 +22,6 @@ const getCategoryNamesOfStoreProducts = () => {
 }
 
 module.exports = {
-  getCategoryNamesOfStoreProducts,
+  getCategoryNamesOfStoreProducts, getCategories
 };
 

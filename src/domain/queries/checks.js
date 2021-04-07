@@ -1,5 +1,15 @@
 const {sequelize} = require('../models');
 
+
+const getChecks = () => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Checks' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+};
+
 // all checks of customers
 const getChecksOfEmployees = () => {
   return sequelize.query(
@@ -26,5 +36,6 @@ const getChecksOfEmployee = (id_employee) => {
 module.exports = {
   getChecksOfEmployees,
   getChecksOfEmployee,
+  getChecks
 };
 

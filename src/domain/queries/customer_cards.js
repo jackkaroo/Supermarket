@@ -1,7 +1,16 @@
 const {sequelize} = require('../models');
 
-// get names of customers and employees that had checks signed
-// by customers with salary over 10 000
+
+const getCustomers = () => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Customer_Cards ' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+
 // покупці які мають чек з продавцями з зарплатою більше 10 000
 const getCustomersHighPaidEmployees = () => {
   return sequelize.query(
@@ -42,7 +51,7 @@ const getCustomersCheckWithSeller = () => {
 }
 
 module.exports = {
-  getCustomersHighPaidEmployees,getCustomersCheckWithSeller
+  getCustomersHighPaidEmployees,getCustomersCheckWithSeller,getCustomers
 };
 
 

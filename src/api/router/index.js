@@ -23,6 +23,14 @@ index
     '/employees',
     require('./employees'),
   )
+  .use(
+    '/products',
+    require('./products'),
+  )
+  .use(
+    '/store-products',
+    require('./store-products'),
+  )
 ;
 
 module.exports = index;

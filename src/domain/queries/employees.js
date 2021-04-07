@@ -1,6 +1,23 @@
 const {sequelize} = require('../models');
 
-//
+const getEmployees = () => {
+  return sequelize.query(
+    'SELECT *' +
+    'FROM Employees' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+const deleteEmployee = (id) => {
+  console.log(id)
+  return sequelize.query(
+    `DELETE FROM Employees WHERE Employees.id_employee=${id}` +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
 const getEmployeesCheckCustomerKyiv = () => {
   return sequelize.query(
     'SELECT Employees.id_employee, empl_surname, empl_name ' +
@@ -25,6 +42,6 @@ const getEmployeesCheckCustomerKyiv = () => {
 }
 
 module.exports = {
-  getEmployeesCheckCustomerKyiv,
+  getEmployeesCheckCustomerKyiv, getEmployees, deleteEmployee
 };
 

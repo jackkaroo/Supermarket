@@ -1,0 +1,23 @@
+ul {
+    padding-left: 1em;
+    display:block;
+    margin-bottom: 40px;
+}
+li {
+    display: inline-block;
+    vertical-align: middle;
+    list-style-position: inside;
+    list-style-type: disc;
+    margin-right: 1em;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.header {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.header .btn {
+    margin-left: 50px;
+}
