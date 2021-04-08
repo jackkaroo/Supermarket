@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
 import Product from "./Product"
+import ProductHeader from "./ProductHeader"
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -26,16 +27,7 @@ export default function Products() {
         <button className="btn btn-primary">Add new</button>
       </div>
       <table className="table table-hover table-bordered">
-        <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Id Product</th>
-          <th scope="col">Category Number</th>
-          <th scope="col">Product Name</th>
-          <th scope="col">Characteristics</th>
-          <th width="80px"></th>
-        </tr>
-        </thead>
+        <ProductHeader/>
         <tbody>
         {products.map((product,index) => <Product key={product.id_product} product={product} index={index}/>)}
         </tbody>

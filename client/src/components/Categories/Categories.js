@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
 import Category from "./Category"
+import CategoryHeader from "./CategoryHeader"
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -26,14 +27,7 @@ export default function Categories() {
         <button className="btn btn-primary">Add new</button>
       </div>
       <table className="table table-hover table-bordered">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th scope="col">Number</th>
-          <th scope="col">Name</th>
-          <th width="80px"></th>
-        </tr>
-        </thead>
+        <CategoryHeader/>
         <tbody>
         {categories.map((category,index) => <Category key={category.id_category} category={category} index={index}/>)}
         </tbody>

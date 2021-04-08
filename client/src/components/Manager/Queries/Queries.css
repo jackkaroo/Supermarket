@@ -9,3 +9,26 @@
 .mb-30 {
     margin-bottom: 30px;
 }
+
+.mr-30 {
+    margin-right: 30px;
+}
+
+.btn {
+    height: 50px;
+    width: 100px;
+}
+
+.manager-queries {
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-bottom: 200px;
+}
+
+.query-item {
+    margin-bottom: 50px;
+}
+
+input {
+    height: 45px;
+}
