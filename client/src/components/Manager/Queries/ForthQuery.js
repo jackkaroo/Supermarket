@@ -1,6 +1,6 @@
 import {useState} from "react"
-import './Queries.css'
-import ButtonShow from "../ButtonShow"
+import '../../../Queries.css'
+import ButtonShow from "../../Button/ButtonShow"
 
 export default function ForthQuery( {path} ) {
 

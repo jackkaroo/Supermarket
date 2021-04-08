@@ -3,7 +3,7 @@ import '../../../Queries.css'
 import ButtonShow from "../../Button/ButtonShow"
 import Input from "../../Input/Input"
 
-export default function SecondQuery( {path} ) {
+export default function EightQuery( {path} ) {
 
   const [items, setItems] = useState([]);
   const [clickedCheck, setClickedCheck] = useState(false);
@@ -13,33 +13,29 @@ export default function SecondQuery( {path} ) {
     <div className="query-item">
       <div className="d-flex justify-content-between mb-30 align-items-center">
         <div>
-          <h3>Запит 2</h3>
-          <h5>Cписок товарів, що належать певній категорії, відсортованих за назвою;</h5>
+          <h3>Запит 8</h3>
+          <h5>За UPC-товару знайти ціну продажу товару, кількість наявних одиниць товару.</h5>
         </div>
         <div className="d-flex align-items-center">
-          <Input setQueryParam={setQueryParam} placeholder={'Enter Category Name'}/>
+          <Input  setQueryParam={setQueryParam} placeholder={'Enter UPC'}/>
           <ButtonShow setItems={setItems} setClickedCheck={setClickedCheck} path={path + '/' + queryParam}/>
         </div>
       </div>
       <div className={(clickedCheck)? 'header-show' : 'header-hide'}>
         <table className="table table-hover table-bordered">
           <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Id Product</th>
-              <th scope="col">Category Number</th>
-              <th scope="col">Product Name</th>
-              <th scope="col">Characteristics</th>
-            </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+          </tr>
           </thead>
           <tbody>
-          {items.map((product,index) =>
-            <tr key={product.id_product}>
+          {items.map((item,index) =>
+            <tr key={item.UPC}>
               <td>{index + 1}</td>
-              <td>{product.id_product}</td>
-              <td>{product.category_number}</td>
-              <td>{product.product_name}</td>
-              <td>{product.characteristics}</td>
+              <td>{Math.round(item.selling_price)}</td>
+              <td>{item.products_number}</td>
             </tr>
           )}
           </tbody>

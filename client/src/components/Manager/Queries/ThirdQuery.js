@@ -3,7 +3,7 @@ import '../../../Queries.css'
 import ButtonShow from "../../Button/ButtonShow"
 import Input from "../../Input/Input"
 
-export default function SecondQuery( {path} ) {
+export default function ThirdQuery( {path} ) {
 
   const [items, setItems] = useState([]);
   const [clickedCheck, setClickedCheck] = useState(false);
@@ -13,33 +13,37 @@ export default function SecondQuery( {path} ) {
     <div className="query-item">
       <div className="d-flex justify-content-between mb-30 align-items-center">
         <div>
-          <h3>Запит 2</h3>
-          <h5>Cписок товарів, що належать певній категорії, відсортованих за назвою;</h5>
+          <h3>Запит 3</h3>
+          <h5>За прізвищем працівника знайти його телефон та адресу;</h5>
         </div>
         <div className="d-flex align-items-center">
-          <Input setQueryParam={setQueryParam} placeholder={'Enter Category Name'}/>
+          <Input  setQueryParam={setQueryParam} placeholder={'Enter Surname'}/>
           <ButtonShow setItems={setItems} setClickedCheck={setClickedCheck} path={path + '/' + queryParam}/>
         </div>
       </div>
       <div className={(clickedCheck)? 'header-show' : 'header-hide'}>
         <table className="table table-hover table-bordered">
           <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Id Product</th>
-              <th scope="col">Category Number</th>
-              <th scope="col">Product Name</th>
-              <th scope="col">Characteristics</th>
-            </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">City</th>
+            <th scope="col">Address</th>
+            <th scope="col">Zip code</th>
+          </tr>
           </thead>
           <tbody>
-          {items.map((product,index) =>
-            <tr key={product.id_product}>
+          {items.map((item,index) =>
+            <tr key={item.empl_surname}>
               <td>{index + 1}</td>
-              <td>{product.id_product}</td>
-              <td>{product.category_number}</td>
-              <td>{product.product_name}</td>
-              <td>{product.characteristics}</td>
+              <td>{item.empl_surname}</td>
+              <td>{item.empl_name}</td>
+              <td>{item.phone_number}</td>
+              <td>{item.city}</td>
+              <td>{item.street}</td>
+              <td>{item.zip_code}</td>
             </tr>
           )}
           </tbody>

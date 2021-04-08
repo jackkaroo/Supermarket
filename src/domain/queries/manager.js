@@ -82,7 +82,7 @@ const getStoreProductsByProduct = (id) => {
 /*8.	За UPC-товару знайти ціну продажу товару, кількість наявних одиниць товару.*/
 const getPriceQuantityByUPC = (upc) => {
   return sequelize.query(
-    'SELECT * ' +
+    'SELECT UPC, selling_price, products_number ' +
     'FROM Store_Products ' +
     'WHERE Store_Products.UPC = "' + `${upc}` + '"' +
     ';',

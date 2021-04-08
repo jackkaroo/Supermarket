@@ -3,7 +3,7 @@ import '../../../Queries.css'
 import ButtonShow from "../../Button/ButtonShow"
 import Input from "../../Input/Input"
 
-export default function SecondQuery( {path} ) {
+export default function SixthQuery( {path} ) {
 
   const [items, setItems] = useState([]);
   const [clickedCheck, setClickedCheck] = useState(false);
@@ -13,11 +13,11 @@ export default function SecondQuery( {path} ) {
     <div className="query-item">
       <div className="d-flex justify-content-between mb-30 align-items-center">
         <div>
-          <h3>Запит 2</h3>
-          <h5>Cписок товарів, що належать певній категорії, відсортованих за назвою;</h5>
+          <h3>Запит 6</h3>
+          <h5>Скласти список всіх товарів, що належать певній категорії;</h5>
         </div>
         <div className="d-flex align-items-center">
-          <Input setQueryParam={setQueryParam} placeholder={'Enter Category Name'}/>
+          <Input  setQueryParam={setQueryParam} placeholder={'Enter Category Name'}/>
           <ButtonShow setItems={setItems} setClickedCheck={setClickedCheck} path={path + '/' + queryParam}/>
         </div>
       </div>
@@ -33,13 +33,13 @@ export default function SecondQuery( {path} ) {
             </tr>
           </thead>
           <tbody>
-          {items.map((product,index) =>
-            <tr key={product.id_product}>
+          {items.map((item,index) =>
+            <tr key={item.id_product}>
               <td>{index + 1}</td>
-              <td>{product.id_product}</td>
-              <td>{product.category_number}</td>
-              <td>{product.product_name}</td>
-              <td>{product.characteristics}</td>
+              <td>{item.id_product}</td>
+              <td>{item.category_number}</td>
+              <td>{item.product_name}</td>
+              <td>{item.characteristics}</td>
             </tr>
           )}
           </tbody>
