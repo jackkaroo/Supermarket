@@ -39,7 +39,7 @@ export default function Checks() {
         </tr>
         </thead>
         <tbody>
-        {checks.map((check,index) => <Check key={check.id_check} check={check} index={index}/>)}
+        {checks.map((check,index) => <Check key={check.check_number} check={check} index={index}/>)}
         </tbody>
       </table>
     </div>

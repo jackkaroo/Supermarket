@@ -1,3 +1,5 @@
+import {handleDate} from "../../helpers/handleDate"
+
 export default function Check( {check, index}) {
   const editCheck = () => {
   }
@@ -23,12 +25,6 @@ export default function Check( {check, index}) {
       </td>
     </tr>
   );
-}
-
-function handleDate(date) {
-  const newDate = new Date(date);
-  const finalDate = `${newDate.getDate()}.${newDate.getMonth() + 1}.${newDate.getFullYear()}`
-  return finalDate;
 }
 
 

@@ -3,7 +3,7 @@ import '../../../Queries.css'
 import ButtonShow from "../../Button/ButtonShow"
 import Input from "../../Input/Input"
 
-export default function EighteenthQuery( {path} ) {
+export default function NinthQuery( {path} ) {
 
   const [items, setItems] = useState([]);
   const [clickedCheck, setClickedCheck] = useState(false);
@@ -13,11 +13,11 @@ export default function EighteenthQuery( {path} ) {
     <div className="query-item">
       <div className="d-flex justify-content-between mb-30 align-items-center">
         <div>
-          <h3>Запит 18</h3>
-          <h5>За UPC-товару знайти ціну продажу товару, кількість наявних одиниць товару, назву та характеристики товару.</h5>
+          <h3>Запит 9</h3>
+          <h5>За номером чека скласти список усіх товарів, інформація про продаж яких є у цьому чеку;</h5>
         </div>
         <div className="d-flex align-items-center">
-          <Input  setQueryParam={setQueryParam} placeholder={'Enter UPC'}/>
+          <Input setQueryParam={setQueryParam} placeholder={'Enter Check Number'}/>
           <ButtonShow setItems={setItems} setClickedCheck={setClickedCheck} path={path + '/' + queryParam}/>
         </div>
       </div>
@@ -26,20 +26,20 @@ export default function EighteenthQuery( {path} ) {
           <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Selling Price</th>
+            <th scope="col">Id Product</th>
+            <th scope="col">Category Number</th>
+            <th scope="col">Product Name</th>
             <th scope="col">Characteristics</th>
           </tr>
           </thead>
           <tbody>
-          {items.map((item,index) =>
-            <tr key={item.product_name}>
+          {items.map((product,index) =>
+            <tr key={product.id_product}>
               <td>{index + 1}</td>
-              <td>{item.product_name}</td>
-              <td>{item.products_number}</td>
-              <td>{item.selling_price}</td>
-              <td>{item.characteristics}</td>
+              <td>{product.id_product}</td>
+              <td>{product.category_number}</td>
+              <td>{product.product_name}</td>
+              <td>{product.characteristics}</td>
             </tr>
           )}
           </tbody>
@@ -48,5 +48,8 @@ export default function EighteenthQuery( {path} ) {
     </div>
   );
 }
+
+
+
 
 

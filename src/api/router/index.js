@@ -10,13 +10,13 @@ index
   )
   .use(
     '/categories',
-    employeeJwtMiddleware,
-    managerMiddleware,
+    // employeeJwtMiddleware,
+    // managerMiddleware,
     require('./categories'),
   )
   .use(
     '/sales',
-    employeeJwtMiddleware,
+    // employeeJwtMiddleware,
     require('./sales'),
   )
   .use(

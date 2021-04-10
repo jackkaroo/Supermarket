@@ -29,7 +29,7 @@ export default function Categories() {
       <table className="table table-hover table-bordered">
         <CategoryHeader/>
         <tbody>
-        {categories.map((category,index) => <Category key={category.id_category} category={category} index={index}/>)}
+        {categories.map((category,index) => <Category key={index} category={category} index={index}/>)}
         </tbody>
       </table>
     </div>

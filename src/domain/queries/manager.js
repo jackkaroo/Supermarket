@@ -97,7 +97,7 @@ const getChecksBySellerByTime = (surname) => {
   return sequelize.query(
     'SELECT * ' +
     'FROM Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee ' +
-    'WHERE empl_surname = "' + `${surname}` + '"' +
+    'WHERE empl_surname = "' + `${surname}` + '" ' +
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );

@@ -4,7 +4,7 @@ const {sequelize} = require('../models');
 const getCategories = () => {
   return sequelize.query(
     'SELECT * ' +
-    'FROM Categories' +
+    'FROM Categories ' +
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );

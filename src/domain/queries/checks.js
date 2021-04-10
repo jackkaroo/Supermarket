@@ -4,7 +4,8 @@ const {sequelize} = require('../models');
 const getChecks = () => {
   return sequelize.query(
     'SELECT * ' +
-    'FROM Checks' +
+    'FROM Checks ' +
+    'ORDER BY check_number' +
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );

@@ -14,12 +14,18 @@
     margin-right: 30px;
 }
 
-.btn {
+.btn-primary {
     height: 50px;
     width: 100px;
 }
 
 .manager-queries {
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-bottom: 200px;
+}
+
+.seller-queries {
     margin-left: 40px;
     margin-right: 40px;
     padding-bottom: 200px;

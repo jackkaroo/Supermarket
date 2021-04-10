@@ -57,7 +57,54 @@ const getEmployeeInfoById = (id) => {
   );
 }
 
+/*Скласти список усіх акційних товарів, відсортованих за кількістю одиниць товару/ за назвою;*/
+const getPromProductsByQuantity = () => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Store_Products INNER JOIN Products ON Store_Products.id_product = Products.id_product ' +
+    'WHERE promotional_product = "' + `${1}` + '" ' +
+    'ORDER BY products_number ' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+const getPromProductsByName = () => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Store_Products INNER JOIN Products ON Store_Products.id_product = Products.id_product ' +
+    'WHERE promotional_product = "' + `${1}` + '" ' +
+    'ORDER BY Products.product_name ' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+const getNotPromProductsByQuantity = () => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Store_Products INNER JOIN Products ON Store_Products.id_product = Products.id_product ' +
+    'WHERE promotional_product = "' + `${0}` + '" ' +
+    'ORDER BY products_number ' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+const getNotPromProductsByName = () => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Store_Products INNER JOIN Products ON Store_Products.id_product = Products.id_product ' +
+    'WHERE promotional_product = "' + `${0}` + '" ' +
+    'ORDER BY Products.product_name ' +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
 module.exports = {
-  getInfoByCheck,getCustomerInfoBySurname,getProductInfoByCheck,getEmployeeInfoById,getProductInfoByUpc
+  getInfoByCheck,getCustomerInfoBySurname,getProductInfoByCheck,getEmployeeInfoById,
+  getProductInfoByUpc,getPromProductsByName,getPromProductsByQuantity,getNotPromProductsByQuantity,
+  getNotPromProductsByName
 };
 

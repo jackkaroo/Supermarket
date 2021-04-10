@@ -8,6 +8,7 @@ import StoreProducts from "../StoreProducts/StoreProducts"
 import Checks from "../Checks/Checks"
 import Customers from "../Customers/Customers"
 import Manager from "../Manager/Manager"
+import Seller from "../Seller/Seller"
 
 export default function Header() {
   return (
@@ -69,7 +70,7 @@ export default function Header() {
               <Manager />
             </Route>
             <Route path="/seller">
-              <Customers />
+              <Seller />
             </Route>
             <Route path="/">
               <Home />

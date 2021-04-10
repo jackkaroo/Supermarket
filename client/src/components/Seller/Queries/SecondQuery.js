@@ -2,8 +2,9 @@ import {useState} from "react"
 import '../../../Queries.css'
 import ButtonShow from "../../Button/ButtonShow"
 import Input from "../../Input/Input"
+import {handleDate} from "../../../helpers/handleDate"
 
-export default function EighteenthQuery( {path} ) {
+export default function SecondQuery( {path} ) {
 
   const [items, setItems] = useState([]);
   const [clickedCheck, setClickedCheck] = useState(false);
@@ -13,11 +14,11 @@ export default function EighteenthQuery( {path} ) {
     <div className="query-item">
       <div className="d-flex justify-content-between mb-30 align-items-center">
         <div>
-          <h3>Запит 18</h3>
-          <h5>За UPC-товару знайти ціну продажу товару, кількість наявних одиниць товару, назву та характеристики товару.</h5>
+          <h3>Запит 2</h3>
+          <h5>За номером чеку вивести усю інформацію про даний чек.</h5>
         </div>
         <div className="d-flex align-items-center">
-          <Input  setQueryParam={setQueryParam} placeholder={'Enter UPC'}/>
+          <Input setQueryParam={setQueryParam} placeholder={'Enter Check Number'}/>
           <ButtonShow setItems={setItems} setClickedCheck={setClickedCheck} path={path + '/' + queryParam}/>
         </div>
       </div>
@@ -26,20 +27,24 @@ export default function EighteenthQuery( {path} ) {
           <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Selling Price</th>
-            <th scope="col">Characteristics</th>
+            <th scope="col">Check Number</th>
+            <th scope="col">Id Employee</th>
+            <th scope="col">Card Number</th>
+            <th scope="col">Print Date</th>
+            <th scope="col">Total Sum</th>
+            <th scope="col">Vat</th>
           </tr>
           </thead>
           <tbody>
-          {items.map((item,index) =>
-            <tr key={item.product_name}>
+          {items.map((check,index) =>
+            <tr key={check.check_number}>
               <td>{index + 1}</td>
-              <td>{item.product_name}</td>
-              <td>{item.products_number}</td>
-              <td>{item.selling_price}</td>
-              <td>{item.characteristics}</td>
+              <td>{check.check_number}</td>
+              <td>{check.id_employee}</td>
+              <td>{check.card_number}</td>
+              <td>{handleDate(check.print_date)}</td>
+              <td>{check.sum_total}</td>
+              <td>{check.vat}</td>
             </tr>
           )}
           </tbody>
@@ -48,5 +53,8 @@ export default function EighteenthQuery( {path} ) {
     </div>
   );
 }
+
+
+
 
 

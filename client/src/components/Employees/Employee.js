@@ -1,3 +1,5 @@
+import {handleDate} from "../../helpers/handleDate"
+
 export default function Employee( {employee, index}) {
 
   const editEmployee = () => {
@@ -34,8 +36,3 @@ export default function Employee( {employee, index}) {
   );
 }
 
-function handleDate(date) {
-  const newDate = new Date(date);
-  const finalDate = `${newDate.getDate()}.${newDate.getMonth() + 1}.${newDate.getFullYear()}`
-  return finalDate;
-}

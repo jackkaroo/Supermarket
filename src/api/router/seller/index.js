@@ -1,6 +1,8 @@
 const express = require('express');
 const {
-  getInfoByCheck,getCustomerInfoBySurname,getProductInfoByCheck,getEmployeeInfoById,getProductInfoByUpc
+  getInfoByCheck,getCustomerInfoBySurname,getPromProductsByQuantity,getPromProductsByName,
+  getProductInfoByCheck,getEmployeeInfoById,getProductInfoByUpc,getNotPromProductsByQuantity,
+  getNotPromProductsByName
 } = require('../../../domain/queries/seller');
 
 const {
@@ -76,6 +78,42 @@ seller
   try {
     const {upc} = req.params;
     const data = await getProductInfoByUpc(upc);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+})
+.get('/prom-products-by-quantity', async (req, res, next) => {
+  try {
+    const {upc} = req.params;
+    const data = await getPromProductsByQuantity(upc);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+})
+.get('/prom-products-by-name', async (req, res, next) => {
+  try {
+    const {upc} = req.params;
+    const data = await getPromProductsByName(upc);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+})
+.get('/not-prom-products-by-quantity', async (req, res, next) => {
+  try {
+    const {upc} = req.params;
+    const data = await getNotPromProductsByQuantity(upc);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+})
+.get('/not-prom-products-by-name', async (req, res, next) => {
+  try {
+    const {upc} = req.params;
+    const data = await getNotPromProductsByName(upc);
     res.json(data);
   } catch (error) {
     next(error);

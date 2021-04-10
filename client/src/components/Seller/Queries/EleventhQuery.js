@@ -1,40 +1,45 @@
 import {useState} from "react"
 import '../../../Queries.css'
 import ButtonShow from "../../Button/ButtonShow"
+import Input from "../../Input/Input"
 import {handleDate} from "../../../helpers/handleDate"
 
-export default function FirstQuery( {path} ) {
+export default function EleventhQuery( {path} ) {
 
   const [items, setItems] = useState([]);
   const [clickedCheck, setClickedCheck] = useState(false);
+  const [queryParam, setQueryParam] = useState('');
 
   return (
     <div className="query-item">
       <div className="d-flex justify-content-between mb-30 align-items-center">
         <div>
-          <h3>Запит 1</h3>
-          <h5>Cписок працівників, що займають посаду касира, відсортованих за прізвищем</h5>
+          <h3>Запит 11</h3>
+          <h5>За ID_працівника знайти всю інформацію про себе.</h5>
         </div>
-        <ButtonShow setItems={setItems} setClickedCheck={setClickedCheck} path={path}/>
+        <div className="d-flex align-items-center">
+          <Input setQueryParam={setQueryParam} placeholder={'Enter Id Employee'}/>
+          <ButtonShow setItems={setItems} setClickedCheck={setClickedCheck} path={path + '/' + queryParam}/>
+        </div>
       </div>
       <div className={(clickedCheck)? 'header-show' : 'header-hide'}>
         <table className="table table-hover table-bordered">
           <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Id</th>
-              <th scope="col">Surname</th>
-              <th scope="col">Name</th>
-              <th scope="col">Patronymic</th>
-              <th scope="col">Role</th>
-              <th scope="col">Salary</th>
-              <th scope="col">Date birth</th>
-              <th scope="col">Date start</th>
-              <th scope="col">Phone</th>
-              <th scope="col">City</th>
-              <th scope="col">Street</th>
-              <th scope="col">Zip code</th>
-            </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Name</th>
+            <th scope="col">Patronymic</th>
+            <th scope="col">Role</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Date birth</th>
+            <th scope="col">Date start</th>
+            <th scope="col">Phone</th>
+            <th scope="col">City</th>
+            <th scope="col">Street</th>
+            <th scope="col">Zip code</th>
+          </tr>
           </thead>
           <tbody>
           {items.map((employee,index) =>
@@ -60,4 +65,8 @@ export default function FirstQuery( {path} ) {
     </div>
   );
 }
+
+
+
+
 
