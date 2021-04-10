@@ -37,4 +37,9 @@
 
 input {
     height: 45px;
+    padding-left: 10px;
+}
+
+.btn-reload {
+    margin-right: 30px;
 }

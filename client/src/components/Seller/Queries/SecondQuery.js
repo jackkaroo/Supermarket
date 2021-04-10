@@ -3,6 +3,7 @@ import '../../../Queries.css'
 import ButtonShow from "../../Button/ButtonShow"
 import Input from "../../Input/Input"
 import {handleDate} from "../../../helpers/handleDate"
+import ButtonReload from "../../Button/ButtonReload"
 
 export default function SecondQuery( {path} ) {
 
@@ -19,6 +20,7 @@ export default function SecondQuery( {path} ) {
         </div>
         <div className="d-flex align-items-center">
           <Input setQueryParam={setQueryParam} placeholder={'Enter Check Number'}/>
+          <ButtonReload setItems={setItems} path={path + '/' + queryParam}/>
           <ButtonShow setItems={setItems} setClickedCheck={setClickedCheck} path={path + '/' + queryParam}/>
         </div>
       </div>

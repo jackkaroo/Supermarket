@@ -2,6 +2,7 @@ import {useState} from "react"
 import '../../../Queries.css'
 import ButtonShow from "../../Button/ButtonShow"
 import Input from "../../Input/Input"
+import ButtonReload from "../../Button/ButtonReload"
 
 export default function ThirdQuery( {path} ) {
 
@@ -18,6 +19,7 @@ export default function ThirdQuery( {path} ) {
         </div>
         <div className="d-flex align-items-center">
           <Input setQueryParam={setQueryParam} placeholder={'Enter Surname'}/>
+          <ButtonReload setItems={setItems} path={path + '/' + queryParam}/>
           <ButtonShow setItems={setItems} setClickedCheck={setClickedCheck} path={path + '/' + queryParam}/>
         </div>
       </div>
