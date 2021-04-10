@@ -17,6 +17,7 @@ export default function Manager() {
 
   return (
     <div className="manager-queries">
+      <h1 className="mb-30">Manager Queries</h1>
       <FirstQuery path={basePath + '/list-sellers'}/>
       <SecondQuery path={basePath + '/products-by-category-sorted'}/>
       <ThirdQuery path={basePath + '/phone-address-by-employee'}/>

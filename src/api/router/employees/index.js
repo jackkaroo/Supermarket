@@ -1,5 +1,6 @@
 const express = require('express');
-const {getEmployeesCheckCustomerKyiv, getEmployees, deleteEmployee} = require('../../../domain/queries/employees');
+const {getEmployeesCheckCustomerKyiv, getEmployees,addEmployee,
+  deleteEmployee} = require('../../../domain/queries/employees');
 
 const employees = express();
 
@@ -7,6 +8,15 @@ employees
   .get('/', async (req, res, next) => {
     try {
       const data = await getEmployees();
+      res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  })
+  .post('/', async (req, res, next) => {
+    console.log(req.body)
+    try {
+      const data = await addEmployee(req.body);
       res.json(data);
     } catch (error) {
       next(error);

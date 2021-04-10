@@ -35,9 +35,10 @@
     margin-bottom: 50px;
 }
 
-input {
+input, select {
     height: 45px;
     padding-left: 10px;
+    min-width: 200px;
 }
 
 .btn-reload {

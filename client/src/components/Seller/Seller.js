@@ -15,6 +15,7 @@ export default function Seller() {
 
   return (
     <div className="seller-queries">
+      <h1 className="mb-30">Seller Queries</h1>
       <SecondQuery path={basePath + '/info-by-check'}/>
       <ThirdQuery path={basePath + '/customer-info-by-surname'}/>
       <ForthQuery path={basePath + '/customers-by-percent'}/>

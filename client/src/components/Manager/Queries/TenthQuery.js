@@ -46,7 +46,6 @@ export default function TenthQuery( {path} ) {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Id Product</th>
-            <th scope="col">UPC_prom</th>
             <th scope="col">Product Name</th>
             <th scope="col">Category Number</th>
             <th scope="col">Characteristics</th>
@@ -58,7 +57,6 @@ export default function TenthQuery( {path} ) {
             <tr key={product.id_product}>
               <td>{index + 1}</td>
               <td>{product.id_product}</td>
-              <td>{product.UPC_prom}</td>
               <td>{product.product_name}</td>
               <td>{product.category_number}</td>
               <td>{product.characteristics}</td>

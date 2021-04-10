@@ -29,6 +29,21 @@ const getEmployees = () => {
   );
 }
 
+const addEmployee = (body) => {
+  return sequelize.query(
+    'INSERT INTO Employees (id_employee, email, password, empl_surname, empl_name, empl_patronymic, ' +
+    'role, salary, date_of_birth, date_of_start, phone_number, ' +
+    'city, street, zip_code ) ' +
+    `VALUES ("${body.id_employee}", "${body.email}", "${body.password}", 
+    "${body.empl_surname}", "${body.empl_name}", "${body.empl_patronymic}", 
+    "${body.role}", "${body.salary}", "${body.date_of_birth}", "${body.date_of_start}",
+    "${body.phone_number}", "${body.city}", "${body.street}", "${body.zip_code}" ) ` +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+
 const deleteEmployee = (id) => {
   console.log(id)
   return sequelize.query(
@@ -66,5 +81,6 @@ module.exports = {
   deleteEmployee,
   findEmployeeByEmail,
   findEmployeeById,
+  addEmployee
 };
 
