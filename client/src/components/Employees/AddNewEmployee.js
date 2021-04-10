@@ -1,8 +1,8 @@
-import './Modal.css'
+import '../../Modal.css'
 import Input from "../Input/Input"
 import {useState} from "react"
 
-export default function Modal ({ handleClose, show, children}) {
+export default function NewEmployeeModal ({ handleClose, show, children}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
   const [surname, setSurname] = useState('');
   const [name, setName] = useState('');

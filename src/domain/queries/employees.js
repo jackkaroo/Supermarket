@@ -39,7 +39,7 @@ const addEmployee = (body) => {
     "${body.role}", "${body.salary}", "${body.date_of_birth}", "${body.date_of_start}",
     "${body.phone_number}", "${body.city}", "${body.street}", "${body.zip_code}" ) ` +
     ';',
-    {type: sequelize.QueryTypes.SELECT},
+    {type: sequelize.QueryTypes.INSERT},
   );
 }
 

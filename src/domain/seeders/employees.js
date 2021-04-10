@@ -48,5 +48,21 @@ module.exports = async function(db) {
       street: 'Stalina 12' ,
       zip_code: '7752'
     },
+    {
+      id_employee: 'id_empl_4' ,
+      email: '4',
+      password: '4',
+      empl_surname: 'Babenich4',
+      empl_name: 'Dima4',
+      empl_patronymic: 'Viktorovich4' ,
+      role: 'seller',
+      salary: 12000 ,
+      date_of_birth: '2001-01-17' ,
+      date_of_start:  '2020-09-20',
+      phone_number: '+380674476544',
+      city: 'Mikolaiv' ,
+      street: 'Stalina 14' ,
+      zip_code: '7754'
+    },
   ]);
 };

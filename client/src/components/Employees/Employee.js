@@ -1,6 +1,6 @@
 import {handleDate} from "../../helpers/handleDate"
 
-export default function Employee( {employee, index}) {
+export default function Employee( {employee, index, fetchData}) {
 
   const editEmployee = () => {
 
@@ -9,7 +9,12 @@ export default function Employee( {employee, index}) {
   const deleteEmployee = () => {
     fetch('http://localhost:3001/api/employees/' + employee.id_employee, {
       method: 'DELETE',
-    });
+    })
+    .then(res => {
+      if(res.ok) fetchData()
+      else console.log('error')
+    })
+
   }
 
 
