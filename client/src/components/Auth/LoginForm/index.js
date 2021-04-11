@@ -21,6 +21,7 @@ export default function LoginForm({login: signIn}) {
       const data = await signIn({ email, password });
       const token = data.data.data;
       const tokenData = jwt_decode(token);
+      localStorage.setItem('token', token) ;
       localStorage.setItem('id', tokenData.id) ;
       localStorage.setItem('role', tokenData.role) ;
     } catch {
