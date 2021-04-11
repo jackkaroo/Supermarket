@@ -1,5 +1,6 @@
 const back_dev_url = "http://localhost:3001";
 const axios = require("axios");
+const { getFetchHeaders } = require("../../helpers/webApiHelper");
 
 const login = async (data) => {
   return new Promise((res, rej) => {
@@ -33,5 +34,21 @@ const register = async (data) => {
   })
 };
 
-export default {login, register}
+const getUserByToken = async () => {
+  return new Promise((res, rej) => {
+    axios
+      .get(
+        `${back_dev_url}/api/auth/user`, // EXAMPLE OF AUTHORIZED ROUTER
+        getFetchHeaders()
+      )
+      .then(response => {
+        res(response)
+      })
+      .catch(error => {
+        rej(error)
+      })
+  })
+};
+
+export default {login, register, getUserByToken}
 
