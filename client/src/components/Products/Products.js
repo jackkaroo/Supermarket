@@ -3,6 +3,7 @@ import Product from "./Product"
 import ProductHeader from "./ProductHeader"
 import Header from "../Header"
 import NewEmployeeModal from "../Employees/AddNewEmployee"
+const exportCSVFile = require('../../helpers/csv');
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -30,11 +31,34 @@ export default function Products() {
     fetchData()
   }, [])
 
+  const makeReport = () => {
+    const fileTitle = 'employees'; // or 'my-unique-title'
+    const itemsFormatted = [];
+    const headers = {
+      id_product: "id",
+      category_number: "category_id",
+      product_name: 'name',
+      characteristics: 'characteristics'
+    };
+
+    products.forEach((item) => {
+      itemsFormatted.push({
+        id_product: item.id_product,
+        category_number: item.category_number,
+        product_name: item.product_name,
+        characteristics: item.characteristics
+      });
+    });
+
+    exportCSVFile(headers, itemsFormatted, fileTitle);
+  }
+
   return (
     <div className="products-wrapper">
       <Header/>
       <div className="header">
         <h2>Products</h2>
+        <button onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           && <button className="btn btn-primary" onClick={() => setShowModal(true)}>

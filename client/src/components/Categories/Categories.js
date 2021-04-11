@@ -3,6 +3,7 @@ import Category from "./Category"
 import CategoryHeader from "./CategoryHeader"
 import Header from "../Header"
 import NewEmployeeModal from "../Employees/AddNewEmployee"
+const exportCSVFile = require('../../helpers/csv');
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -30,11 +31,30 @@ export default function Categories() {
     fetchData()
   }, [])
 
+  const makeReport = () => {
+    const fileTitle = 'employees'; // or 'my-unique-title'
+    const itemsFormatted = [];
+    const headers = {
+      category_number: "id",
+      category_name: "name",
+    };
+
+    categories.forEach((item) => {
+      itemsFormatted.push({
+        category_number: item.category_number,
+        category_name: item.category_name,
+      });
+    });
+
+    exportCSVFile(headers, itemsFormatted, fileTitle);
+  }
+
   return (
     <div className="categories-wrapper">
       <Header/>
       <div className="header">
         <h2>Categories</h2>
+        <button onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           && <button className="btn btn-primary" onClick={() => setShowModal(true)}>

@@ -2,6 +2,7 @@ import {useEffect, useState} from "react"
 import Check from "./Check"
 import Header from "../Header"
 import NewEmployeeModal from "../Employees/AddNewEmployee"
+const exportCSVFile = require('../../helpers/csv');
 
 export default function Checks() {
   const [checks, setChecks] = useState([]);
@@ -30,11 +31,38 @@ export default function Checks() {
     fetchData()
   }, [])
 
+  const makeReport = () => {
+    const fileTitle = 'employees'; // or 'my-unique-title'
+    const itemsFormatted = [];
+    const headers = {
+      check_number: "check_id",
+      id_employee: 'employee_id',
+      card_number: 'customer_id',
+      print_date: 'print_date',
+      sum_total: "total",
+      vat: "vat",
+    };
+
+    checks.forEach((item) => {
+      itemsFormatted.push({
+        check_number: item.check_number,
+        id_employee: item.check_number,
+        card_number: item.check_number,
+        print_date: item.check_number,
+        sum_total: item.check_number,
+        vat: item.vat,
+      });
+    });
+
+    exportCSVFile(headers, itemsFormatted, fileTitle);
+  }
+
   return (
     <div className="checks-wrapper">
       <Header/>
       <div className="header">
         <h2>Checks</h2>
+        <button onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           && <button className="btn btn-primary" onClick={() => setShowModal(true)}>

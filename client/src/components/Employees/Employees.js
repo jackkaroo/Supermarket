@@ -4,6 +4,8 @@ import EmployeeHeader from "./EmployeeHeader"
 import NewEmployeeModal from "./AddNewEmployee"
 import Header from "../Header"
 
+const exportCSVFile = require('../../helpers/csv');
+
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -29,11 +31,52 @@ export default function Employees() {
     fetchData()
   }, [])
 
+  const makeReport = () => {
+    const fileTitle = 'employees'; // or 'my-unique-title'
+    const itemsFormatted = [];
+    const headers = {
+      id_employee: "id",
+      email: "email",
+      empl_surname: "last name",
+      empl_name: "name",
+      empl_patronymic: "patro",
+      role: "role",
+      salary: "salary",
+      date_of_birth: "birth",
+      date_of_start: "start",
+      phone_number: "phone",
+      city: "city",
+      street: "str",
+      zip_code: "zip",
+    };
+
+    employees.forEach((item) => {
+      itemsFormatted.push({
+        id_employee: item.id_employee,
+        email: item.email,
+        empl_surname: item.empl_surname,
+        empl_name: item.empl_name,
+        empl_patronymic: item.empl_patronymic,
+        role: item.role,
+        salary: item.salary,
+        date_of_birth: item.date_of_birth,
+        date_of_start: item.date_of_start,
+        phone_number: item.phone_number,
+        city: item.city,
+        street: item.street,
+        zip_code: item.zip_code,
+      });
+    });
+
+    exportCSVFile(headers, itemsFormatted, fileTitle);
+  }
+
   return (
     <div className="employees-wrapper">
       <Header/>
       <div className="header">
         <h2>Employeers</h2>
+        <button onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           &&
@@ -52,3 +95,9 @@ export default function Employees() {
     </div>
   );
 }
+
+
+
+
+
+

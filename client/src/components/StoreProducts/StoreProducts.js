@@ -2,6 +2,7 @@ import {useEffect, useState} from "react"
 import StoreProduct from "./StoreProduct"
 import Header from "../Header"
 import NewEmployeeModal from "../Employees/AddNewEmployee"
+const exportCSVFile = require('../../helpers/csv');
 
 export default function StoreProducts() {
   const [storeProducts, setStoreProducts] = useState([]);
@@ -29,11 +30,38 @@ export default function StoreProducts() {
     fetchData()
   }, [])
 
+  const makeReport = () => {
+    const fileTitle = 'employees'; // or 'my-unique-title'
+    const itemsFormatted = [];
+    const headers = {
+      UPC: 'upc',
+      UPC_prom: "upc prom",
+      id_product: "prod_id",
+      selling_price: "price",
+      products_number: "quantity",
+      promotional_product: "prmotion"
+    };
+
+    storeProducts.forEach((item) => {
+      itemsFormatted.push({
+        UPC: item.UPC,
+        UPC_prom: item.UPC_prom,
+        id_product: item.id_product,
+        selling_price: item.selling_price,
+        products_number: item.products_number,
+        promotional_product: item.promotional_product
+      });
+    });
+
+    exportCSVFile(headers, itemsFormatted, fileTitle);
+  }
+
   return (
     <div className="store-products-wrapper">
       <Header/>
       <div className="header">
         <h2>Store Products</h2>
+        <button onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
