@@ -12,7 +12,7 @@ const {
   getAllProducts, getInfoByCheck, getCustomersByPercent,
   getAllCategories, getStoreProductsByProduct,
   getPriceQuantityByUPC, getChecksBySellerByTime,
-  getInfoByUpc
+  getInfoByUpc,getSumQuantityProductsBySellerByTime,getSumQuantityProductsByTime
 } = require('../../../domain/queries/manager');
 
 const manager = express();
@@ -91,7 +91,9 @@ manager
 .get('/checks-by-seller-by-time/:surname', async (req, res, next) => {
   try {
     const {surname} = req.params;
-    const data = await getChecksBySellerByTime(surname);
+    const {dateFrom, dateTo} = req.query;
+    console.log(dateFrom, dateTo)
+    const data = await getChecksBySellerByTime(surname,dateFrom,dateTo);
     res.json(data);
   } catch (error) {
     next(error);
@@ -99,7 +101,27 @@ manager
 })
 .get('/checks-by-seller-by-time', async (req, res, next) => {
   try {
-    const data = await getChecksByAllSellerByTime();
+    const {dateFrom, dateTo} = req.query;
+    const data = await getChecksByAllSellerByTime(dateFrom,dateTo);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+})
+.get('/products-sum-by-seller-by-time/:surname', async (req, res, next) => {
+  try {
+    const {surname} = req.params;
+    const {dateFrom, dateTo} = req.query;
+    const data = await getSumQuantityProductsBySellerByTime(surname,dateFrom,dateTo);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+})
+.get('/products-sum-by-time', async (req, res, next) => {
+  try {
+    const {dateFrom, dateTo} = req.query;
+    const data = await getSumQuantityProductsByTime(dateFrom,dateTo);
     res.json(data);
   } catch (error) {
     next(error);

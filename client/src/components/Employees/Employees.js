@@ -35,7 +35,7 @@ export default function Employees() {
         <EmployeeHeader/>
         <tbody>
           {employees.map((employee,index) =>
-            <Employee key={employee.id_employee} fetchData={() => fetchData} employee={employee} index={index}/>)}
+            <Employee key={employee.id_employee} fetchData={fetchData} employee={employee} index={index}/>)}
         </tbody>
       </table>
     </div>

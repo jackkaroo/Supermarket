@@ -2,7 +2,7 @@ const express = require('express');
 const {
   getInfoByCheck,getCustomerInfoBySurname,getPromProductsByQuantity,getPromProductsByName,
   getProductInfoByCheck,getEmployeeInfoById,getProductInfoByUpc,getNotPromProductsByQuantity,
-  getNotPromProductsByName
+  getNotPromProductsByName,getChecksBySellerByTime
 } = require('../../../domain/queries/seller');
 
 const {
@@ -12,6 +12,17 @@ const {
 const seller = express();
 
 seller
+.get('/checks-by-seller-by-time/:surname', async (req, res, next) => {
+  try {
+    const {surname} = req.params;
+    const {dateFrom, dateTo} = req.query;
+    console.log(dateFrom, dateTo)
+    const data = await getChecksBySellerByTime(surname,dateFrom,dateTo);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+})
 .get('/info-by-check/:checkId', async (req, res, next) => {
   try {
     const {checkId} = req.params;

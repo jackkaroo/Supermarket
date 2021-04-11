@@ -11,7 +11,7 @@ export default function Employee( {employee, index, fetchData}) {
       method: 'DELETE',
     })
     .then(res => {
-      if(res.ok) fetchData()
+      if(res.status === 200) fetchData()
       else console.log('error')
     })
 

@@ -93,11 +93,12 @@ const getPriceQuantityByUPC = (upc) => {
 /*11.	Скласти список чеків, видрукуваних певним касиром за певний період часу
  (з можливістю перегляду куплених товарів, їх к-сті та ціни);*/
 
-const getChecksBySellerByTime = (surname) => {
+const getChecksBySellerByTime = (surname, dateFrom, dateTo) => {
   return sequelize.query(
-    'SELECT * ' +
+    'SELECT check_number, Checks.id_employee, card_number, print_date, sum_total, vat ' +
     'FROM Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee ' +
-    'WHERE empl_surname = "' + `${surname}` + '" ' +
+    `WHERE empl_surname = "${surname}" ` +
+    `AND print_date BETWEEN "${dateFrom}" AND "${dateTo}" `  +
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );
@@ -119,14 +120,44 @@ const getInfoByCheck = (checkId) => {
 /*12.	 Скласти список чеків, видрукуваних усіма касирами за певний період часу
 (з можливістю перегляду куплених товарів, їх к-сті та ціни );*/
 
-const getChecksByAllSellerByTime = () => {
+const getChecksByAllSellerByTime = (dateFrom,dateTo) => {
   return sequelize.query(
     'SELECT * ' +
     'FROM Checks ' +
+    `WHERE print_date BETWEEN "${dateFrom}" AND "${dateTo}"`  +
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );
 }
+
+/*13. Загальна сума проданих товарів з чеків,
+видрукуваних певним касиром за певний період часу;*/
+const getSumQuantityProductsBySellerByTime = (surname, dateFrom, dateTo) => {
+  return sequelize.query(
+    'SELECT SUM(product_number) ' +
+    'FROM (Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee) ' +
+    'INNER JOIN Sales ON Sales.check_number = Checks.check_number ' +
+    `WHERE empl_surname = "${surname}" ` +
+    `AND print_date BETWEEN "${dateFrom}" AND "${dateTo}" `  +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+/*14.
+Загальна сума проданих товарів з чеків, видрукуваних усіма касиром за певний період часу;*/
+const getSumQuantityProductsByTime = (dateFrom, dateTo) => {
+  return sequelize.query(
+    'SELECT SUM(product_number) ' +
+    'FROM (Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee) ' +
+    'INNER JOIN Sales ON Sales.check_number = Checks.check_number ' +
+    `WHERE print_date BETWEEN "${dateFrom}" AND "${dateTo}" `  +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
+
 
 /*16.	Скласти список усіх постійних клієнтів, що мають карту клієнта,
 по полях  ПІБ, телефон, адреса (якщо вказана);*/
@@ -167,6 +198,7 @@ module.exports = {
   getListSellers, getProductsByCategory, getPhoneAddressByEmployee, getAllProducts, getAllCategories,
   getStoreProductsByProduct, getPriceQuantityByUPC,getChecksBySellerByTime,getInfoByCheck,
   getChecksByAllSellerByTime, getCustomersPibPhoneAddress,getCustomersByPercent,
-  getInfoByUpc, getProductsByCategorySorted
+  getInfoByUpc, getProductsByCategorySorted,getSumQuantityProductsBySellerByTime,
+  getSumQuantityProductsByTime
 };
 

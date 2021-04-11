@@ -1,4 +1,4 @@
-const {Employee} = require('../../../domain/models');
+const {Employee} = require('../../domain/models');
 
 const jwtTokenHelper = require('../helpers/jwtTokenHelper');
 

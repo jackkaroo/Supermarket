@@ -1,5 +1,18 @@
 const {sequelize} = require('../models');
 
+/*1.	Скласти список чеків,  видрукуваних даним касиром за певний період часу;*/
+
+const getChecksBySellerByTime = (surname, dateFrom, dateTo) => {
+  return sequelize.query(
+    'SELECT * ' +
+    'FROM Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee ' +
+    `WHERE empl_surname = "${surname}" ` +
+    `AND print_date BETWEEN "${dateFrom}" AND "${dateTo}" `  +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
+
 /*2.	За номером чеку вивести усю інформацію про даний чек.*/
 const getInfoByCheck = (checkId) => {
   return sequelize.query(
@@ -105,6 +118,6 @@ const getNotPromProductsByName = () => {
 module.exports = {
   getInfoByCheck,getCustomerInfoBySurname,getProductInfoByCheck,getEmployeeInfoById,
   getProductInfoByUpc,getPromProductsByName,getPromProductsByQuantity,getNotPromProductsByQuantity,
-  getNotPromProductsByName
+  getNotPromProductsByName,getChecksBySellerByTime
 };
 
