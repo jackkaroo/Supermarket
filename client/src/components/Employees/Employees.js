@@ -75,15 +75,15 @@ export default function Employees() {
     <div className="employees-wrapper">
       <Header/>
       <div className="header">
-        <h2>Employeers</h2>
-        <button onClick={makeReport}>Report</button>
+        <h2>Employees</h2>
+        <button className="btn btn-secondary" onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           &&
           <button className="btn btn-primary" onClick={() => setShowModal(true)}>Add new</button>
         }
 
-        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}/>
+        <NewEmployeeModal fetchData={fetchData} show={showModal} handleClose={() => setShowModal(false)}/>
       </div>
       <table className="table table-hover table-bordered">
         <EmployeeHeader/>

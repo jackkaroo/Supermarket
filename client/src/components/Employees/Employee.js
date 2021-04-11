@@ -50,7 +50,7 @@ export default function Employee( {employee, index, fetchData}) {
         <td>
           <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={() => setShowModal(true)} />
           <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteEmployee}/>
-          <EditEmployeeModal employee={employee}
+          <EditEmployeeModal employee={employee} fetchData={fetchData}
             show={showModal} handleClose={() => setShowModal(false)}/>
         </td>
 

@@ -30,6 +30,7 @@ export default function LoginForm({login: signIn}) {
       localStorage.setItem('role', tokenData.role);
       history.push('/home');
     } catch {
+      alert('Sorry. User not found.')
       setIsLoading(false);
     }
   };
@@ -52,9 +53,9 @@ export default function LoginForm({login: signIn}) {
           type="password"
           onChange={ev => passwordChanged(ev.target.value)}
         />
-        <Button type="submit" color="teal" fluid size="large" loading={isLoading} primary>
+        <button className="btn btn-primary mt-30" type="submit" loading={isLoading} >
           Login
-        </Button>
+        </button>
       </Segment>
     </Form>
   );

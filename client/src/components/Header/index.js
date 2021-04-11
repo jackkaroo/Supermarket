@@ -36,13 +36,21 @@ export default function Header() {
         <li>
           <Link to="/customers">Client Cards</Link>
         </li>
-        <li>
-          <Link to="/manager">Manager</Link>
-        </li>
-        <li>
-          <Link to="/seller">Seller</Link>
-        </li>
-        <button onClick={logout}>
+        {
+          localStorage.getItem("role") === "manager"
+          &&
+          <li>
+            <Link to="/manager">Manager</Link>
+          </li>
+        }
+        {
+          localStorage.getItem("role") === "seller"
+          &&
+          <li>
+            <Link to="/seller">Seller</Link>
+          </li>
+        }
+        <button onClick={logout} className="btn btn-secondary">
           Logout
         </button>
       </ul>

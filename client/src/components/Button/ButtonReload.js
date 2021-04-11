@@ -8,6 +8,9 @@ export default function ButtonReload( {setItems, path} ) {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
+    .then((response) => {
+      return response.json();
+    })
     .then((data) => {
       console.log(data);
       setItems(data);

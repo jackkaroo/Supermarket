@@ -1,5 +1,5 @@
 const express = require('express');
-const {employeeJwtMiddleware, managerMiddleware} = require('../middlewares/auth')
+const {employeeJwtMiddleware, managerMiddleware, sellerMiddleware} = require('../middlewares/auth')
 
 const index = express();
 
@@ -52,6 +52,7 @@ index
   .use(
     '/seller',
     employeeJwtMiddleware,
+    sellerMiddleware,
     require('./seller'),
   )
 ;

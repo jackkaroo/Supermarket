@@ -25,8 +25,9 @@ employees
   })
   .put('/:id', async (req, res, next) => {
     const {id} = req.params;
+    console.log(req.body)
     try {
-      const data = await Employee.update(id, req.body);
+      const data = await Employee.update(req.body, {where: {id_employee:id}});
       res.json(data);
     } catch (error) {
       next(error);

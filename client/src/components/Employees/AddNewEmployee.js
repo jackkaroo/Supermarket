@@ -3,7 +3,7 @@ import Input from "../Input/Input"
 import {useState} from "react"
 const { getFetchHeaders } = require("../../helpers/webApiHelper");
 
-export default function NewEmployeeModal ({ handleClose, show, children}) {
+export default function NewEmployeeModal ({ handleClose, show, fetchData}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
   const [surname, setSurname] = useState('');
   const [name, setName] = useState('');
@@ -50,8 +50,11 @@ export default function NewEmployeeModal ({ handleClose, show, children}) {
       body: JSON.stringify(obj)
     })
     .then(res => {
-      if(res.status === 200)
+      if(res.status === 200) {
         alert('You successfully added new employee.')
+        fetchData();
+        handleClose();
+      }
       else {
         alert('You entered invalid information. Try again.')
       }
@@ -64,27 +67,27 @@ export default function NewEmployeeModal ({ handleClose, show, children}) {
         <h2 className="mb-30">Add new Employee</h2>
         <div className='d-flex justify-content-center '>
           <div>
-            <Input setQueryParam={setSurname} placeholder={'Enter Surname'}/>
-            <Input setQueryParam={setName} placeholder={'Enter Name'}/>
-            <Input setQueryParam={setPatronymic} placeholder={'Enter Patronymic'}/>
-            {/*<Input setQueryParam={setRole} placeholder={'Enter Role'}/>*/}
+            <Input label={'Enter Surname'} setQueryParam={setSurname}/>
+            <Input setQueryParam={setName} label={'Enter Name'}/>
+            <Input setQueryParam={setPatronymic} label={'Enter Patronymic'}/>
+            <label>Enter Role</label>
             <select onChange={e => setRole(e.target.value)}>
-              <option disabled>Choose role</option>
+              <option disabled selected>Choose role</option>
               <option>Seller</option>
               <option>Manager</option>
             </select>
-            <Input type="number" setQueryParam={setSalary} placeholder={'Enter Salary'}/></div>
+            <Input type="number" setQueryParam={setSalary} label={'Enter Salary'}/></div>
           <div>
-            <Input type={'date'}  setQueryParam={setBirth} placeholder={'Enter Birth'}/>
-            <Input type={'date'} setQueryParam={setStart} placeholder={'Enter Start'}/>
-            <Input setQueryParam={setPhone} placeholder={'Enter Phone'}/>
-            <Input setQueryParam={setCity} placeholder={'Enter City'}/>
-            <Input setQueryParam={setStreet} placeholder={'Enter Street'}/>
+            <Input type={'date'}  setQueryParam={setBirth} label={'Enter Date Birth'}/>
+            <Input type={'date'} setQueryParam={setStart} label={'Enter Date Start'}/>
+            <Input setQueryParam={setPhone} label={'Enter Phone'}/>
+            <Input setQueryParam={setCity} label={'Enter City'}/>
+            <Input setQueryParam={setStreet} label={'Enter Street'}/>
           </div>
           <div>
-            <Input setQueryParam={setZip} placeholder={'Enter Zip'}/>
-            <Input type="email" setQueryParam={setEmail} placeholder={'Enter Email'}/>
-            <Input type="password" setQueryParam={setPassword} placeholder={'Enter Password'}/>
+            <Input setQueryParam={setZip} label={'Enter Zip Code'}/>
+            <Input type="email" setQueryParam={setEmail} label={'Enter Email'}/>
+            <Input type="password" setQueryParam={setPassword} label={'Enter Password'}/>
             <div className="">
               <button className="btn btn-success" onClick={saveChanges}>Save</button>
               <button className="btn btn-danger" onClick={handleClose}>Close</button>

@@ -1,9 +1,11 @@
+import {handleDate} from "../../helpers/handleDate"
 import '../../styles/Modal.css'
 import Input from "../Input/Input"
 import {useState} from "react"
 const { getFetchHeaders } = require("../../helpers/webApiHelper");
 
-export default function EditEmployeeModal ({ employee, handleClose, show}) {
+
+export default function EditEmployeeModal ({ employee, handleClose, show, fetchData}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
   const [surname, setSurname] = useState('');
   const [name, setName] = useState('');
@@ -18,12 +20,11 @@ export default function EditEmployeeModal ({ employee, handleClose, show}) {
   const [zip, setZip] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [id, setId] = useState('');
 
 
   const saveChanges = () => {
     const obj = {
-      id_employee: id,
+      id_employee: employee.id_employee,
       email: email,
       password: password,
       empl_surname: surname,
@@ -40,7 +41,7 @@ export default function EditEmployeeModal ({ employee, handleClose, show}) {
     }
     console.log(obj);
 
-    fetch('http://localhost:3001/api/employees/', {
+    fetch('http://localhost:3001/api/employees/' + employee.id_employee , {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -50,8 +51,11 @@ export default function EditEmployeeModal ({ employee, handleClose, show}) {
       body: JSON.stringify(obj)
     })
     .then(res => {
-      if(res.status === 200)
+      if(res.status === 200) {
         alert('You successfully added new employee.')
+        fetchData();
+        handleClose();
+      }
       else {
         alert('You entered invalid information. Try again.')
       }
@@ -64,28 +68,29 @@ export default function EditEmployeeModal ({ employee, handleClose, show}) {
         <h2 className="mb-30">Edit Employee</h2>
         <div className='d-flex justify-content-center '>
           <div>
-            <Input value={employee.empl_surname} setQueryParam={setSurname} placeholder={'Enter Surname'}/>
-            <Input value={employee.empl_name} setQueryParam={setName} placeholder={'Enter Name'}/>
-            <Input setQueryParam={setPatronymic} placeholder={'Enter Patronymic'}/>
+            <Input value={employee.empl_surname} setQueryParam={setSurname} placeholder={employee.empl_surname} label={'Enter Surname'}/>
+            <Input value={employee.empl_name} setQueryParam={setName} placeholder={employee.empl_name} label={'Enter Name'}/>
+            <Input value={employee.empl_patronymic} setQueryParam={setPatronymic} placeholder={employee.empl_patronymic} label={'Enter Patronymic'}/>
             {/*<Input setQueryParam={setRole} placeholder={'Enter Role'}/>*/}
+            <label>Enter Role</label>
             <select onChange={e => setRole(e.target.value)}>
-              <option disabled>Choose role</option>
+              <option disabled selected>Choose role</option>
               <option>Seller</option>
               <option>Manager</option>
             </select>
-            <Input type="number" setQueryParam={setSalary} placeholder={'Enter Salary'}/></div>
+            <Input value={Math.round(employee.salary)} type="number" setQueryParam={setSalary} placeholder={Math.round(employee.salary)} label={'Enter Salary'}/></div>
           <div>
-            <Input type={'date'}  setQueryParam={setBirth} placeholder={'Enter Birth'}/>
-            <Input type={'date'} setQueryParam={setStart} placeholder={'Enter Start'}/>
-            <Input setQueryParam={setPhone} placeholder={'Enter Phone'}/>
-            <Input setQueryParam={setCity} placeholder={'Enter City'}/>
-            <Input setQueryParam={setStreet} placeholder={'Enter Street'}/>
+            {/*<input type="date" value={(employee.date_of_birth)}/>*/}
+            <Input type={'date'} value={(employee.date_of_birth)}  setQueryParam={setBirth} label={'Enter Date Birth'}/>
+            <Input type={'date'} value={(employee.date_of_start)} setQueryParam={setStart} label={'Enter Date Start'}/>
+            <Input value={employee.phone_number} setQueryParam={setPhone} placeholder={employee.phone_number} label={'Enter phone'}/>
+            <Input value={employee.city} setQueryParam={setCity} placeholder={employee.city} label={'Enter city'}/>
+            <Input value={employee.street} setQueryParam={setStreet} placeholder={employee.street} label={'Enter street'}/>
           </div>
           <div>
-            <Input setQueryParam={setZip} placeholder={'Enter Zip'}/>
-            <Input type="email" setQueryParam={setEmail} placeholder={'Enter Email'}/>
-            <Input type="password" setQueryParam={setPassword} placeholder={'Enter Password'}/>
-            <Input setQueryParam={setId} placeholder={'Enter Id'}/>
+            <Input value={employee.zip_code} setQueryParam={setZip} placeholder={employee.zip_code} label={'Enter zip code'}/>
+            <Input value={employee.email} type="email" setQueryParam={setEmail} placeholder={employee.email} label={'Enter email'}/>
+            <Input value={employee.password} type="password" setQueryParam={setPassword} label={'Enter Password'} placeholder={employee.password}/>
             <div className="">
               <button className="btn btn-success" onClick={saveChanges}>Save</button>
               <button className="btn btn-danger" onClick={handleClose}>Close</button>
