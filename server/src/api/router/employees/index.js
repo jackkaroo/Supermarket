@@ -1,6 +1,7 @@
 const express = require('express');
 const {getEmployeesCheckCustomerKyiv, getEmployees,addEmployee,
   deleteEmployee} = require('../../../domain/queries/employees');
+const {Employee} = require('../../../domain/models');
 
 const employees = express();
 
@@ -16,7 +17,16 @@ employees
   .post('/', async (req, res, next) => {
     console.log(req.body)
     try {
-      const data = await addEmployee(req.body);
+      const data = await Employee.create(req.body);
+      res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  })
+  .put('/:id', async (req, res, next) => {
+    const {id} = req.params;
+    try {
+      const data = await Employee.update(id, req.body);
       res.json(data);
     } catch (error) {
       next(error);

@@ -36,13 +36,11 @@ export default function Employees() {
         <h2>Employeers</h2>
         {
           localStorage.getItem("role") === "manager"
-          && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-            Add new
-          </button>
+          &&
+          <button className="btn btn-primary" onClick={() => setShowModal(true)}>Add new</button>
         }
 
-        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}>
-        </NewEmployeeModal>
+        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}/>
       </div>
       <table className="table table-hover table-bordered">
         <EmployeeHeader/>

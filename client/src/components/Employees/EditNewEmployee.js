@@ -3,7 +3,7 @@ import Input from "../Input/Input"
 import {useState} from "react"
 const { getFetchHeaders } = require("../../helpers/webApiHelper");
 
-export default function NewEmployeeModal ({ handleClose, show, children}) {
+export default function EditEmployeeModal ({ employee, handleClose, show}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
   const [surname, setSurname] = useState('');
   const [name, setName] = useState('');
@@ -23,7 +23,7 @@ export default function NewEmployeeModal ({ handleClose, show, children}) {
 
   const saveChanges = () => {
     const obj = {
-      id_employee: Math.random().toString(36).substring(10),
+      id_employee: id,
       email: email,
       password: password,
       empl_surname: surname,
@@ -40,8 +40,8 @@ export default function NewEmployeeModal ({ handleClose, show, children}) {
     }
     console.log(obj);
 
-    fetch('http://localhost:3001/api/employees', {
-      method: 'POST',
+    fetch('http://localhost:3001/api/employees/', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -61,11 +61,11 @@ export default function NewEmployeeModal ({ handleClose, show, children}) {
   return (
     <div className={showHideClassName}>
       <section className='modal-main'>
-        <h2 className="mb-30">Add new Employee</h2>
+        <h2 className="mb-30">Edit Employee</h2>
         <div className='d-flex justify-content-center '>
           <div>
-            <Input setQueryParam={setSurname} placeholder={'Enter Surname'}/>
-            <Input setQueryParam={setName} placeholder={'Enter Name'}/>
+            <Input value={employee.empl_surname} setQueryParam={setSurname} placeholder={'Enter Surname'}/>
+            <Input value={employee.empl_name} setQueryParam={setName} placeholder={'Enter Name'}/>
             <Input setQueryParam={setPatronymic} placeholder={'Enter Patronymic'}/>
             {/*<Input setQueryParam={setRole} placeholder={'Enter Role'}/>*/}
             <select onChange={e => setRole(e.target.value)}>
@@ -85,6 +85,7 @@ export default function NewEmployeeModal ({ handleClose, show, children}) {
             <Input setQueryParam={setZip} placeholder={'Enter Zip'}/>
             <Input type="email" setQueryParam={setEmail} placeholder={'Enter Email'}/>
             <Input type="password" setQueryParam={setPassword} placeholder={'Enter Password'}/>
+            <Input setQueryParam={setId} placeholder={'Enter Id'}/>
             <div className="">
               <button className="btn btn-success" onClick={saveChanges}>Save</button>
               <button className="btn btn-danger" onClick={handleClose}>Close</button>
