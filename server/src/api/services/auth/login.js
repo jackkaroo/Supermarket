@@ -1,22 +1,22 @@
-const {findEmployeeByEmail} = require('../../../domain/queries/employees');
+const {Employee} = require('../../../domain/models');
 
 const jwtTokenHelper = require('../helpers/jwtTokenHelper');
 
 const login = async (data) => {
   const {email, password} = data;
-  const employee = await findEmployeeByEmail(email);
+  const employee = await Employee.findOne({where: {email}});
 
-  if (!employee.length) {
+  if (!employee) {
     throw new Error('No such user with email')
   }
 
-  if (employee[0].password !== password) {
+  if (!employee.checkPassword(password, employee.salt, employee.passwordHash)) {
     throw new Error('Invalid password')
   }
 
   const token = jwtTokenHelper.createApiToken({
-    id: employee[0].id_employee,
-    role: employee[0].role,
+    id: employee.id_employee,
+    role: employee.role,
   })
 
   return {

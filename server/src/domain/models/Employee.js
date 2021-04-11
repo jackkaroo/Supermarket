@@ -78,10 +78,10 @@ module.exports = (Sequelize, DataTypes) => {
     timestamps: false,
   });
 
-  Employee.checkPassword = (plain) => {
-    const hash = this._hashPassword(plain, this.salt);
+  Employee.prototype.checkPassword = (plain, salt, empHash) => {
+    const hash = Employee._hashPassword(plain, salt);
 
-    return hash === Employee.passwordHash;
+    return hash === empHash;
   }
 
   Employee._generateSalt = () => {
