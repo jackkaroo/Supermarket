@@ -1,6 +1,8 @@
 import React from 'react';
 import Routing from './routing/index';
-import './App.css';
+import './styles/App.css';
+import './styles/Modal.css';
+import './styles/Queries.css';
 
 import { BrowserRouter } from 'react-router-dom';
 

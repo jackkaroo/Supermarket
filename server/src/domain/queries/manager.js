@@ -102,6 +102,7 @@ const getChecksBySellerByTime = (surname, dateFrom, dateTo) => {
     'INNER JOIN Products ON Store_Products.id_product = Products.id_product) ' +
     `WHERE empl_surname = "${surname}" ` +
     `AND print_date BETWEEN "${dateFrom}" AND "${dateTo}" `  +
+    'ORDER BY check_number' +
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );
@@ -125,9 +126,12 @@ const getInfoByCheck = (checkId) => {
 
 const getChecksByAllSellerByTime = (dateFrom,dateTo) => {
   return sequelize.query(
-    'SELECT * ' +
-    'FROM Checks ' +
+    'SELECT Checks.check_number, Checks.id_employee, Checks.card_number, Checks.print_date, Checks.sum_total, Checks.vat, Products.product_name, Sales.product_number, Store_Products.selling_price ' +
+    'FROM ((Checks INNER JOIN Sales ON Sales.check_number = Checks.check_number) ' +
+    'INNER JOIN Store_Products ON Sales.UPC = Store_Products.UPC) ' +
+    'INNER JOIN Products ON Store_Products.id_product = Products.id_product ' +
     `WHERE print_date BETWEEN "${dateFrom}" AND "${dateTo}"`  +
+    'ORDER BY check_number ' +
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );
@@ -137,7 +141,7 @@ const getChecksByAllSellerByTime = (dateFrom,dateTo) => {
 видрукуваних певним касиром за певний період часу;*/
 const getSumQuantityProductsBySellerByTime = (surname, dateFrom, dateTo) => {
   return sequelize.query(
-    'SELECT SUM(product_number) ' +
+    'SELECT empl_surname, SUM(product_number) as quantity ' +
     'FROM (Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee) ' +
     'INNER JOIN Sales ON Sales.check_number = Checks.check_number ' +
     `WHERE empl_surname = "${surname}" ` +
@@ -151,7 +155,7 @@ const getSumQuantityProductsBySellerByTime = (surname, dateFrom, dateTo) => {
 Загальна сума проданих товарів з чеків, видрукуваних усіма касиром за певний період часу;*/
 const getSumQuantityProductsByTime = (dateFrom, dateTo) => {
   return sequelize.query(
-    'SELECT SUM(product_number) ' +
+    'SELECT SUM(product_number) as quantity ' +
     'FROM (Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee) ' +
     'INNER JOIN Sales ON Sales.check_number = Checks.check_number ' +
     `WHERE print_date BETWEEN "${dateFrom}" AND "${dateTo}" `  +
@@ -163,7 +167,7 @@ const getSumQuantityProductsByTime = (dateFrom, dateTo) => {
 /*15.	 Визначити загальну кількість одиниць певного товару, проданого за певний період часу;*/
 const getSumProductByTime = (product, dateFrom, dateTo) => {
   return sequelize.query(
-    'SELECT SUM(product_number) ' +
+    'SELECT id_product, SUM(product_number) as quantity ' +
     'FROM ((Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee) ' +
     'INNER JOIN Sales ON Sales.check_number = Checks.check_number) ' +
     'INNER JOIN Store_Products ON Sales.UPC = Store_Products.UPC ' +

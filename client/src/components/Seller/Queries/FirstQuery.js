@@ -5,7 +5,7 @@ import Input from "../../Input/Input"
 import ButtonReload from "../../Button/ButtonReload"
 import {handleDate} from "../../../helpers/handleDate"
 
-export default function EleventhQuery( {path} ) {
+export default function FirstQuery( {path} ) {
 
   const [items, setItems] = useState([]);
   const [clickedCheck, setClickedCheck] = useState(false);
@@ -13,32 +13,12 @@ export default function EleventhQuery( {path} ) {
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
 
-  // const [showProducts, setShowProducts] = useState([]);
-
-  // const fetchCheckData = (check_number) => {
-  //   if(showProducts.length === 0) {
-  //     console.log('true')
-  //     fetch('http://localhost:3001/api/manager/info-by-check/' + check_number)
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       setShowProducts(data);
-  //     });
-  //   } else {
-  //     console.log('false')
-  //     setShowProducts([])
-  //   }
-  // }
-
   return (
     <div className="query-item">
       <div className="d-flex justify-content-between mb-30 align-items-center">
         <div>
-          <h3>Запит 11</h3>
-          <h5>Скласти список чеків, видрукуваних певним касиром за певний
-            період часу (з можливістю перегляду куплених товарів, їх к-сті та ціни);</h5>
+          <h3>Запит 1</h3>
+          <h5>Скласти список чеків,  видрукуваних даним касиром за певний період часу;</h5>
         </div>
         <div className="d-flex align-items-center">
           <Input setQueryParam={setQueryParam} placeholder={'Enter Surname'}/>
@@ -61,9 +41,6 @@ export default function EleventhQuery( {path} ) {
             <th scope="col">Print Date</th>
             <th scope="col">Total Sum</th>
             <th scope="col">Vat</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Product Number</th>
-            <th scope="col">Selling Price</th>
           </tr>
           </thead>
           <tbody>
@@ -76,9 +53,6 @@ export default function EleventhQuery( {path} ) {
               <td>{handleDate(check.print_date)}</td>
               <td>{check.sum_total}</td>
               <td>{check.vat}</td>
-              <td>{check.product_name}</td>
-              <td>{check.product_number}</td>
-              <td>{check.selling_price}</td>
             </tr>
           )}
           </tbody>
