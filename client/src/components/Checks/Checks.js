@@ -1,9 +1,13 @@
 import {useEffect, useState} from "react"
 import Check from "./Check"
 import Header from "../Header"
+import NewEmployeeModal from "../Employees/AddNewEmployee"
 
 export default function Checks() {
-  const [checks, setCheks] = useState([]);
+  const [checks, setChecks] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+
   const fetchData = async () => {
     fetch('http://localhost:3001/api/checks', {
       headers: {
@@ -18,7 +22,7 @@ export default function Checks() {
     })
     .then((data) => {
       console.log(data);
-      setCheks(data);
+      setChecks(data);
     });
   };
 
@@ -31,7 +35,15 @@ export default function Checks() {
       <Header/>
       <div className="header">
         <h2>Checks</h2>
-        <button className="btn btn-primary">Add new</button>
+        {
+          localStorage.getItem("role") === "manager"
+          && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+            Add new
+          </button>
+        }
+
+        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}>
+        </NewEmployeeModal>
       </div>
       <table className="table table-hover table-bordered">
         <thead>

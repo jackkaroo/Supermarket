@@ -17,7 +17,10 @@ export default function EmployeeHeader() {
         <th scope="col">City</th>
         <th scope="col">Street</th>
         <th scope="col">Zip code</th>
-        <th width="80px"></th>
+        { localStorage.getItem("role") === "manager"
+            &&
+          <th width="80px"></th>
+        }
       </tr>
     </thead>
   );

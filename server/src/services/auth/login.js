@@ -20,7 +20,7 @@ const login = async (data) => {
   })
 
   return {
-    data: {token},
+    data: token,
   }
 }
 

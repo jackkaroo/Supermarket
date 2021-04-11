@@ -1,10 +1,12 @@
 export default function ButtonReload( {setItems, path} ) {
 
   const clicked = () => {
-    fetch(path)
-    .then((response) => {
-      return response.json();
-
+    fetch(path, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
     .then((data) => {
       console.log(data);

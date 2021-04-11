@@ -10,15 +10,21 @@ export default function ButtonShow( {setItems, setClickedCheck, path} ) {
       setBtnClicked('Hide');
       setClickedCheck(true);
 
-      fetch(path)
+      fetch(path, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
       .then((response) => {
         return response.json();
-
       })
       .then((data) => {
         console.log(data);
         setItems(data);
-      });
+      })
+      .catch(err => console.log(err));
 
     } else {
       setBtnClicked('Show');

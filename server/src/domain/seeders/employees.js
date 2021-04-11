@@ -17,7 +17,7 @@ module.exports = async function(db) {
       zip_code: '02345'
     },
     {
-      id_employee: 'id_empl_2' ,
+      id_employee: 'id_empl_2',
       email: '2',
       password: '2',
       empl_surname: 'Malyar',

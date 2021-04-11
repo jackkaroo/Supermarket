@@ -1,9 +1,12 @@
 import {useEffect, useState} from "react"
 import StoreProduct from "./StoreProduct"
 import Header from "../Header"
+import NewEmployeeModal from "../Employees/AddNewEmployee"
 
 export default function StoreProducts() {
   const [storeProducts, setStoreProducts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
   const fetchData = async () => {
     fetch('http://localhost:3001/api/store-products', {
       headers: {
@@ -31,7 +34,15 @@ export default function StoreProducts() {
       <Header/>
       <div className="header">
         <h2>Store Products</h2>
-        <button className="btn btn-primary">Add new</button>
+        {
+          localStorage.getItem("role") === "manager"
+          && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+            Add new
+          </button>
+        }
+
+        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}>
+        </NewEmployeeModal>
       </div>
       <table className="table table-hover table-bordered">
         <thead>

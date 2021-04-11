@@ -2,9 +2,12 @@ import {useEffect, useState} from "react"
 import Category from "./Category"
 import CategoryHeader from "./CategoryHeader"
 import Header from "../Header"
+import NewEmployeeModal from "../Employees/AddNewEmployee"
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
   const fetchData = async () => {
     fetch('http://localhost:3001/api/categories', {
       headers: {
@@ -32,7 +35,15 @@ export default function Categories() {
       <Header/>
       <div className="header">
         <h2>Categories</h2>
-        <button className="btn btn-primary">Add new</button>
+        {
+          localStorage.getItem("role") === "manager"
+          && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+            Add new
+          </button>
+        }
+
+        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}>
+        </NewEmployeeModal>
       </div>
       <table className="table table-hover table-bordered">
         <CategoryHeader/>

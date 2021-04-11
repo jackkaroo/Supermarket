@@ -17,11 +17,12 @@ export default function Employee( {employee, index, fetchData}) {
     })
     .then(res => {
       if(res.status === 200) fetchData()
-      else console.log('error')
+      else {
+        alert('You can not delete employee because of database integrity. ' +
+          'Delete checks before.')
+      }
     })
-
   }
-
 
   return (
     <tr>
@@ -38,10 +39,14 @@ export default function Employee( {employee, index, fetchData}) {
       <td>{employee.city}</td>
       <td>{employee.street}</td>
       <td>{employee.zip_code}</td>
-      <td>
-        <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={editEmployee} />
-        <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteEmployee}/>
-      </td>
+      {
+        localStorage.getItem("role") === "manager"
+        &&
+        <td>
+          <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={editEmployee} />
+          <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteEmployee}/>
+        </td>
+      }
     </tr>
   );
 }

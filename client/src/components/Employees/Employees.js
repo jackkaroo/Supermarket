@@ -6,7 +6,7 @@ import Header from "../Header"
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
-  const [show, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const fetchData = async () => {
     fetch('http://localhost:3001/api/employees', {
@@ -18,7 +18,6 @@ export default function Employees() {
     })
     .then((response) => {
       return response.json();
-
     })
     .then((data) => {
       console.log(data);
@@ -37,12 +36,12 @@ export default function Employees() {
         <h2>Employeers</h2>
         {
           localStorage.getItem("role") === "manager"
-          && <button className="btn btn-primary" onClick={() => setShow(true)}>
+          && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
             Add new
           </button>
         }
 
-        <NewEmployeeModal show={show} handleClose={() => setShow(false)}>
+        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}>
         </NewEmployeeModal>
       </div>
       <table className="table table-hover table-bordered">
