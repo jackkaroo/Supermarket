@@ -1,7 +1,12 @@
-export default function Index() {
+import authService from "./auth.service";
+import LoginForm from "../../components/Auth/LoginForm";
+
+export default function Auth() {
   return (
     <>
-     <h1>Auth</h1>
+      <h1>Auth page</h1>
+
+      <LoginForm login={authService.login} />
     </>
   );
 }
