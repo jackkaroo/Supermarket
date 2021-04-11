@@ -1,3 +1,8 @@
+const crypto = require('crypto');
+
+const SALT_LENGTH = 16;
+const KEY_LENGTH  = 64;
+
 module.exports = (Sequelize, DataTypes) => {
   const Employee = Sequelize.define('Employee', {
     id_employee: {
@@ -10,8 +15,20 @@ module.exports = (Sequelize, DataTypes) => {
       allowNull: false,
     },
     password: {
+      type : DataTypes.VIRTUAL,
+      set(password) {
+        const salt = Employee._generateSalt();
+        this.setDataValue('salt', salt);
+        this.setDataValue('passwordHash', Employee._hashPassword(password, salt));
+      }
+    },
+    passwordHash: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+    },
+    salt: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     empl_surname: {
       type: DataTypes.STRING(50),
@@ -60,6 +77,24 @@ module.exports = (Sequelize, DataTypes) => {
   }, {
     timestamps: false,
   });
+
+  Employee.checkPassword = (plain) => {
+    const hash = this._hashPassword(plain, this.salt);
+
+    return hash === Employee.passwordHash;
+  }
+
+  Employee._generateSalt = () => {
+    const salt = crypto.randomBytes(SALT_LENGTH);
+
+    return salt.toString('hex');
+  }
+
+  Employee._hashPassword = (password, salt) => {
+    const hash = crypto.scryptSync(password, salt, KEY_LENGTH);
+
+    return hash.toString('hex');
+  }
 
   Employee.associate = (models) => {
     Employee.hasMany(models.Check, {
