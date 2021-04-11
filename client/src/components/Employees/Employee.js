@@ -9,6 +9,11 @@ export default function Employee( {employee, index, fetchData}) {
   const deleteEmployee = () => {
     fetch('http://localhost:3001/api/employees/' + employee.id_employee, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
     .then(res => {
       if(res.ok) fetchData()

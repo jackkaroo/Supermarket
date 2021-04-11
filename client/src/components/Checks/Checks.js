@@ -4,7 +4,13 @@ import Check from "./Check"
 export default function Checks() {
   const [checks, setCheks] = useState([]);
   const fetchData = async () => {
-    fetch('http://localhost:3001/api/checks')
+    fetch('http://localhost:3001/api/checks', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
     .then((response) => {
       return response.json();
 

@@ -5,7 +5,13 @@ import CategoryHeader from "./CategoryHeader"
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   const fetchData = async () => {
-    fetch('http://localhost:3001/api/categories')
+    fetch('http://localhost:3001/api/categories', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
     .then((response) => {
       return response.json();
 
