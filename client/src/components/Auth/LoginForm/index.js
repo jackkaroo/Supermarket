@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Button, Segment } from 'semantic-ui-react';
 import jwt_decode from "jwt-decode";
+import { useHistory } from "react-router-dom";
 
 export default function LoginForm({login: signIn}) {
+  let history = useHistory();
+
   const [email, setEamil] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -21,9 +24,10 @@ export default function LoginForm({login: signIn}) {
       const data = await signIn({ email, password });
       const token = data.data.data;
       const tokenData = jwt_decode(token);
-      localStorage.setItem('token', token) ;
-      localStorage.setItem('id', tokenData.id) ;
-      localStorage.setItem('role', tokenData.role) ;
+      localStorage.setItem('token', token);
+      localStorage.setItem('id', tokenData.id);
+      localStorage.setItem('role', tokenData.role);
+      history.push('/home');
     } catch {
       setIsLoading(false);
     }

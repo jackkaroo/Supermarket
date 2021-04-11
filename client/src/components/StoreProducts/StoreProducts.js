@@ -5,7 +5,13 @@ import Header from "../Header"
 export default function StoreProducts() {
   const [storeProducts, setStoreProducts] = useState([]);
   const fetchData = async () => {
-    fetch('http://localhost:3001/api/store-products')
+    fetch('http://localhost:3001/api/store-products', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
     .then((response) => {
       return response.json();
 

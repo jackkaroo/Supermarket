@@ -9,7 +9,13 @@ export default function Employees() {
   const [show, setShow] = useState(false);
 
   const fetchData = async () => {
-    fetch('http://localhost:3001/api/employees')
+    fetch('http://localhost:3001/api/employees', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
     .then((response) => {
       return response.json();
 
@@ -29,7 +35,13 @@ export default function Employees() {
       <Header/>
       <div className="header">
         <h2>Employeers</h2>
-        <button className="btn btn-primary" onClick={() => setShow(true)}>Add new</button>
+        {
+          localStorage.getItem("role") === "manager"
+          && <button className="btn btn-primary" onClick={() => setShow(true)}>
+            Add new
+          </button>
+        }
+
         <NewEmployeeModal show={show} handleClose={() => setShow(false)}>
         </NewEmployeeModal>
       </div>

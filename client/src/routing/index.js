@@ -1,5 +1,5 @@
-import '../components/Header/Header.css';
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom"
+import { Route, Switch } from "react-router-dom";
+
 import Home from "../containers/Home"
 import Categories from "../components/Categories/Categories"
 import Employees from "../components/Employees/Employees"
@@ -11,42 +11,43 @@ import Manager from "../components/Manager/Manager"
 import Seller from "../components/Seller/Seller"
 import Auth from "../containers/Auth"
 
-export default function MainRouter() {
+import Header from "../components/Header";
+
+export default function () {
   return (
-    <Router>
+
       <Switch>
         <Route path="/employees">
-          <Employees />
+          <Employees/>
         </Route>
         <Route path="/categories">
-          <Categories />
+          <Categories/>
         </Route>
         <Route path="/products">
-          <Products />
+          <Products/>
         </Route>
         <Route path="/store_products">
-          <StoreProducts />
+          <StoreProducts/>
         </Route>
         <Route path="/checks">
-          <Checks />
+          <Checks/>
         </Route>
         <Route path="/customers">
-          <Customers />
+          <Customers/>
         </Route>
         <Route path="/manager">
-          <Manager />
+          <Manager/>
         </Route>
         <Route path="/seller">
-          <Seller />
+          <Seller/>
         </Route>
         <Route path="/home">
-          <Home />
+          <Home/>
         </Route>
         <Route path="/">
-          <Auth />
+          <Auth/>
         </Route>
       </Switch>
-    </Router>
+
   );
 }
-

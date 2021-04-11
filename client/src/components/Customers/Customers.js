@@ -5,7 +5,13 @@ import Header from "../Header"
 export default function Customers() {
   const [customers, setCustomers] = useState([]);
   const fetchData = async () => {
-    fetch('http://localhost:3001/api/customers')
+    fetch('http://localhost:3001/api/customers', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
     .then((response) => {
       return response.json();
 

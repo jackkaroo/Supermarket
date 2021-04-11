@@ -1,6 +1,7 @@
 import '../../styles/Modal.css'
 import Input from "../Input/Input"
 import {useState} from "react"
+const { getFetchHeaders } = require("../../helpers/webApiHelper");
 
 export default function NewEmployeeModal ({ handleClose, show, children}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
@@ -42,8 +43,9 @@ export default function NewEmployeeModal ({ handleClose, show, children}) {
     fetch('http://localhost:3001/api/employees', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify(obj)
     });

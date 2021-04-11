@@ -1,6 +1,16 @@
 import {Link} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 export default function Header() {
+  let history = useHistory();
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('role');
+    history.push('/auth');
+  }
+
   return (
     <nav>
       <ul>
@@ -31,6 +41,9 @@ export default function Header() {
         <li>
           <Link to="/seller">Seller</Link>
         </li>
+        <button onClick={logout}>
+          Logout
+        </button>
       </ul>
     </nav>
   );
