@@ -2,6 +2,7 @@ import {useEffect, useState} from "react"
 import Employee from "./Employee"
 import EmployeeHeader from "./EmployeeHeader"
 import NewEmployeeModal from "./AddNewEmployee"
+import Header from "../Header"
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
@@ -25,6 +26,7 @@ export default function Employees() {
 
   return (
     <div className="employees-wrapper">
+      <Header/>
       <div className="header">
         <h2>Employeers</h2>
         <button className="btn btn-primary" onClick={() => setShow(true)}>Add new</button>

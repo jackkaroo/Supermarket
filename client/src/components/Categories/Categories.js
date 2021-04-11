@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react"
 import Category from "./Category"
 import CategoryHeader from "./CategoryHeader"
+import Header from "../Header"
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -22,6 +23,7 @@ export default function Categories() {
 
   return (
     <div className="categories-wrapper">
+      <Header/>
       <div className="header">
         <h2>Categories</h2>
         <button className="btn btn-primary">Add new</button>

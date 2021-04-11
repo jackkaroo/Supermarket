@@ -95,8 +95,11 @@ const getPriceQuantityByUPC = (upc) => {
 
 const getChecksBySellerByTime = (surname, dateFrom, dateTo) => {
   return sequelize.query(
-    'SELECT check_number, Checks.id_employee, card_number, print_date, sum_total, vat ' +
-    'FROM Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee ' +
+    'SELECT Checks.check_number, Checks.id_employee, Checks.card_number, Checks.print_date, Checks.sum_total, Checks.vat, Products.product_name, Sales.product_number, Store_Products.selling_price ' +
+    'FROM (((Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee) ' +
+    'INNER JOIN Sales ON Sales.check_number = Checks.check_number ' +
+    'INNER JOIN Store_Products ON Sales.UPC = Store_Products.UPC) ' +
+    'INNER JOIN Products ON Store_Products.id_product = Products.id_product) ' +
     `WHERE empl_surname = "${surname}" ` +
     `AND print_date BETWEEN "${dateFrom}" AND "${dateTo}" `  +
     ';',
@@ -157,7 +160,18 @@ const getSumQuantityProductsByTime = (dateFrom, dateTo) => {
   );
 }
 
-
+/*15.	 Визначити загальну кількість одиниць певного товару, проданого за певний період часу;*/
+const getSumProductByTime = (product, dateFrom, dateTo) => {
+  return sequelize.query(
+    'SELECT SUM(product_number) ' +
+    'FROM ((Checks INNER JOIN Employees ON Employees.id_employee = Checks.id_employee) ' +
+    'INNER JOIN Sales ON Sales.check_number = Checks.check_number) ' +
+    'INNER JOIN Store_Products ON Sales.UPC = Store_Products.UPC ' +
+    `WHERE id_product="${product}" AND print_date BETWEEN "${dateFrom}" AND "${dateTo}" `  +
+    ';',
+    {type: sequelize.QueryTypes.SELECT},
+  );
+}
 
 /*16.	Скласти список усіх постійних клієнтів, що мають карту клієнта,
 по полях  ПІБ, телефон, адреса (якщо вказана);*/
@@ -199,6 +213,6 @@ module.exports = {
   getStoreProductsByProduct, getPriceQuantityByUPC,getChecksBySellerByTime,getInfoByCheck,
   getChecksByAllSellerByTime, getCustomersPibPhoneAddress,getCustomersByPercent,
   getInfoByUpc, getProductsByCategorySorted,getSumQuantityProductsBySellerByTime,
-  getSumQuantityProductsByTime
+  getSumQuantityProductsByTime,getSumProductByTime
 };
 

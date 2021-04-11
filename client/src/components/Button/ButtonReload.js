@@ -1,5 +1,3 @@
-import {useState} from "react"
-
 export default function ButtonReload( {setItems, path} ) {
 
   const clicked = () => {
@@ -15,7 +13,7 @@ export default function ButtonReload( {setItems, path} ) {
   };
 
   return (
-    <img className="icon btn-reload" src="https://imgur.com/tI2qWCY.png" onClick={clicked}/>
+    <img className="icon btn-reload" src="https://imgur.com/tI2qWCY.png" alt="" onClick={clicked}/>
   );
 }
 

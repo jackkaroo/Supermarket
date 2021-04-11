@@ -1,5 +1,5 @@
 import {useState} from "react"
-import '../../../Queries.css'
+import '../../../styles/Queries.css'
 import ButtonShow from "../../Button/ButtonShow"
 
 export default function TenthQuery( {path} ) {

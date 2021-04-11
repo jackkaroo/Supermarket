@@ -1,4 +1,4 @@
-import '../../Modal.css'
+import '../../styles/Modal.css'
 import Input from "../Input/Input"
 import {useState} from "react"
 

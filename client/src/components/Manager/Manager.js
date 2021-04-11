@@ -11,12 +11,15 @@ import Seventeenth from "./Queries/Seventeenth"
 import EighteenthQuery from "./Queries/EighteenthQuery"
 import NinthQuery from "./Queries/NinthQuery"
 import TenthQuery from "./Queries/TenthQuery"
+import Header from "../Header"
+import EleventhQuery from "./Queries/EleventhQuery"
 
 export default function Manager() {
   const basePath = 'http://localhost:3001/api/manager';
 
   return (
     <div className="manager-queries">
+      <Header/>
       <h1 className="mb-30">Manager Queries</h1>
       <FirstQuery path={basePath + '/list-sellers'}/>
       <SecondQuery path={basePath + '/products-by-category-sorted'}/>
@@ -28,6 +31,7 @@ export default function Manager() {
       <EightQuery path={basePath + '/price-quantity-by-upc'}/>
       <NinthQuery path={basePath}/>
       <TenthQuery path={basePath}/>
+      <EleventhQuery path={basePath + '/checks-by-seller-by-time'}/>
       <SixteenQuery path={basePath + '/customers-pib-phone-address'}/>
       <Seventeenth path={basePath + '/customers-by-percent'}/>
       <EighteenthQuery path={basePath + '/info-by-upc'}/>

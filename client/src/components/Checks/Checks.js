@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
 import Check from "./Check"
+import Header from "../Header"
 
 export default function Checks() {
   const [checks, setCheks] = useState([]);
@@ -21,6 +22,7 @@ export default function Checks() {
 
   return (
     <div className="checks-wrapper">
+      <Header/>
       <div className="header">
         <h2>Checks</h2>
         <button className="btn btn-primary">Add new</button>

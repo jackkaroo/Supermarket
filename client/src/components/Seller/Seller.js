@@ -9,12 +9,14 @@ import TenthQuery from "./Queries/TenthQuery"
 import EleventhQuery from "./Queries/EleventhQuery"
 import SeventhQuery from "./Queries/SeventhQuery"
 import EightQuery from "./Queries/EightQuery"
+import Header from "../Header"
 
 export default function Seller() {
   const basePath = 'http://localhost:3001/api/seller';
 
   return (
     <div className="seller-queries">
+      <Header/>
       <h1 className="mb-30">Seller Queries</h1>
       <SecondQuery path={basePath + '/info-by-check'}/>
       <ThirdQuery path={basePath + '/customer-info-by-surname'}/>

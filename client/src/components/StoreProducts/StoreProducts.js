@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
 import StoreProduct from "./StoreProduct"
+import Header from "../Header"
 
 export default function StoreProducts() {
   const [storeProducts, setStoreProducts] = useState([]);
@@ -21,6 +22,7 @@ export default function StoreProducts() {
 
   return (
     <div className="store-products-wrapper">
+      <Header/>
       <div className="header">
         <h2>Store Products</h2>
         <button className="btn btn-primary">Add new</button>

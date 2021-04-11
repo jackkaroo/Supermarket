@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
 import Customer from "./Customer"
+import Header from "../Header"
 
 export default function Customers() {
   const [customers, setCustomers] = useState([]);
@@ -21,6 +22,7 @@ export default function Customers() {
 
   return (
     <div className="customers-wrapper">
+      <Header/>
       <div className="header">
         <h2>Client Cards</h2>
         <button className="btn btn-primary">Add new</button>

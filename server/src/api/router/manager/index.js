@@ -10,7 +10,7 @@ const {
   getProductsByCategory, getCustomersPibPhoneAddress,
   getPhoneAddressByEmployee, getChecksByAllSellerByTime,
   getAllProducts, getInfoByCheck, getCustomersByPercent,
-  getAllCategories, getStoreProductsByProduct,
+  getAllCategories, getStoreProductsByProduct,getSumProductByTime,
   getPriceQuantityByUPC, getChecksBySellerByTime,
   getInfoByUpc,getSumQuantityProductsBySellerByTime,getSumQuantityProductsByTime
 } = require('../../../domain/queries/manager');
@@ -122,6 +122,16 @@ manager
   try {
     const {dateFrom, dateTo} = req.query;
     const data = await getSumQuantityProductsByTime(dateFrom,dateTo);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+})
+.get('/product-sum-by-time/:id', async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const {dateFrom, dateTo} = req.query;
+    const data = await getSumProductByTime(id,dateFrom,dateTo);
     res.json(data);
   } catch (error) {
     next(error);
