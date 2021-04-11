@@ -1,5 +1,5 @@
 import './App.css';
-import Header from "./components/Header/Header"
+import Header from "./router"
 
 
 export default function App() {
