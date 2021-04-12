@@ -1,6 +1,5 @@
 const {sequelize} = require('../models');
 
-
 const getChecks = () => {
   return sequelize.query(
     'SELECT * ' +
@@ -34,9 +33,16 @@ const getChecksOfEmployee = (id_employee) => {
   );
 };
 
+
+
+const deleteCheck = (id) => {
+
+}
+
 module.exports = {
   getChecksOfEmployees,
   getChecksOfEmployee,
-  getChecks
+  getChecks,
+  deleteCheck
 };
 

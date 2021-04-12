@@ -1,5 +1,7 @@
 const {Sequelize} = require('sequelize');
-
+const cls = require('cls-hooked');
+const namespace = cls.createNamespace('my-very-own-namespace');
+Sequelize.useCLS(namespace);
 /*
   CREATE DATABASE supermarket;
   CREATE USER 'supermarket_user'@'%' IDENTIFIED BY 'supermarket_user_password';
