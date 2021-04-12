@@ -13,34 +13,34 @@ categories
       next(error);
     }
   })
-.post('/', async (req, res, next) => {
-  try {
+  .post('/', async (req, res, next) => {
+    try {
 
-    const data = await addCategory(req.body);
-    res.json(data);
-  } catch (error) {
-    next(error);
-  }
-})
-.put('/:id', async (req, res, next) => {
-  try {
-    const {id} = req.params;
-    console.log(req.body)
-    const data = await editCategory(id,req.body);
-    res.json(data);
-  } catch (error) {
-    next(error);
-  }
-})
-.delete('/:id', async (req, res, next) => {
-  try {
-    const {id} = req.params;
-    const data = await deleteCategory(id);
-    res.json(data);
-  } catch (error) {
-    next(error);
-  }
-})
+      const data = await addCategory(req.body);
+      res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  })
+  .put('/:id', async (req, res, next) => {
+    try {
+      const {id} = req.params;
+      console.log(req.body)
+      const data = await editCategory(id,req.body);
+      res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  })
+  .delete('/:id', async (req, res, next) => {
+    try {
+      const {id} = req.params;
+      const data = await deleteCategory(id);
+      res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  })
   .get('/store-products', async (req, res, next) => {
     try {
       const data = await getCategoryNamesOfStoreProducts();

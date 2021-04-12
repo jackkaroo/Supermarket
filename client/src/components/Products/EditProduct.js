@@ -1,22 +1,24 @@
 import '../../styles/Modal.css'
 import Input from "../Input/Input"
 import {useState} from "react"
-const { getFetchHeaders } = require("../../helpers/webApiHelper");
 
-export default function EditCategoryModal ({ category, handleClose, show, fetchData}) {
+export default function EditProductModal ({ product, handleClose, show, fetchData}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
-  const [name, setName] = useState('');
-
-
+  const [productName, setProductName] = useState('');
+  const [categoryNumber, setCategoryNumber] = useState('');
+  const [characteristics, setCharacteristics] = useState('');
+  
   const saveChanges = () => {
     const obj = {
-      category_number: category.category_number,
-      category_name: name,
+      id_product: product.id_product,
+      category_number: categoryNumber,
+      product_name: productName,
+      characteristics : characteristics
     }
     console.log(obj);
 
-    fetch('http://localhost:3001/api/categories/' + category.category_number, {
+    fetch('http://localhost:3001/api/products/' + product.id_product, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -27,7 +29,7 @@ export default function EditCategoryModal ({ category, handleClose, show, fetchD
     })
     .then(res => {
       if(res.status === 200) {
-        alert('You successfully updated category.')
+        alert('You successfully updated product.')
         fetchData();
         handleClose();
       }
@@ -40,10 +42,12 @@ export default function EditCategoryModal ({ category, handleClose, show, fetchD
   return (
     <div className={showHideClassName}>
       <section className='modal-main'>
-        <h2 className="mb-30">Edit Category</h2>
+        <h2 className="mb-30">Edit Product</h2>
         <div className='d-flex justify-content-center '>
           <div>
-            <Input value={category.category_name} placeholder={category.category_name} setQueryParam={setName} label={'Enter Category Name'}/>
+            <Input placeholder={product.category_number} value={product.category_number} type={'number'} setQueryParam={setCategoryNumber} label={'Enter Category Number'}/>
+            <Input placeholder={product.product_name} value={product.product_name} label={'Enter Product Name'} setQueryParam={setProductName}/>
+            <Input placeholder={product.characteristics} value={product.characteristics} setQueryParam={setCharacteristics} label={'Enter Characteristics'}/>
 
             <div className="">
               <button className="btn btn-success" onClick={saveChanges}>Save</button>
