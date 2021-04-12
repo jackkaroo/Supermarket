@@ -13,15 +13,15 @@ export default function NewStoreProductModal ({ handleClose, show, fetchData}) {
   const saveChanges = () => {
 
     const totalPrice = handlePrice(sellingPrice, promotionalProduct);
-    console.log(totalPrice);
+    console.log('total price', totalPrice);
 
-    let promotionalBool = false;
-    if(promotionalProduct === "Yes") promotionalBool = true;
-    console.log(promotionalBool);
+    let promotionalBool = 0;
+    if(promotionalProduct === "Yes") promotionalBool = 1;
+    console.log('prombool', promotionalBool);
 
     const obj = {
       UPC: Math.random().toString(36).substring(12) ,
-      UPC_prom: Math.random().toString(36).substring(12),
+      UPC_prom: null,
       id_product: productId,
       selling_price: totalPrice,
       products_number: productsNumber,
@@ -78,8 +78,14 @@ export default function NewStoreProductModal ({ handleClose, show, fetchData}) {
 };
 
 function handlePrice(price, prom) {
-  if(prom)
-    return price + price * 0.2 + 0.2 * (price + price * 0.2);
-  else
-    return price + price * 0.3 + 0.2 * (price + price * 0.3);
+
+  const newPrice = parseInt(price)
+  if(prom == 1) {
+    let num = price + price * 0.2 + 0.2 * (price + price * 0.2);
+    return Math.round(num);
+  }
+  else {
+    let num = newPrice + newPrice * 0.3 + 0.2 * (newPrice + newPrice * 0.3);
+    return Math.round(num * 100 / 100);
+  }
 }

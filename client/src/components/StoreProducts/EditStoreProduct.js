@@ -2,7 +2,7 @@ import '../../styles/Modal.css'
 import Input from "../Input/Input"
 import {useState} from "react"
 
-export default function EditStoreProductModal ({ handleClose, show, fetchData}) {
+export default function EditStoreProductModal ({ product, handleClose, show, fetchData}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
   const [productId, setProductId] = useState('');
   const [sellingPrice, setSellingPrice] = useState('');
@@ -13,15 +13,15 @@ export default function EditStoreProductModal ({ handleClose, show, fetchData}) 
   const saveChanges = () => {
 
     const totalPrice = handlePrice(sellingPrice, promotionalProduct);
-    console.log(totalPrice);
+    console.log('total price', totalPrice);
 
-    let promotionalBool = false;
-    if(promotionalProduct === "Yes") promotionalBool = true;
-    console.log(promotionalBool);
+    let promotionalBool = 0;
+    if(promotionalProduct === "Yes") promotionalBool = 1;
+    console.log('prombool', promotionalBool);
 
     const obj = {
-      UPC: Math.random().toString(36).substring(12) ,
-      UPC_prom: Math.random().toString(36).substring(12),
+      UPC:product.UPC ,
+      UPC_prom: null,
       id_product: productId,
       selling_price: totalPrice,
       products_number: productsNumber,
@@ -29,8 +29,8 @@ export default function EditStoreProductModal ({ handleClose, show, fetchData}) 
     }
     console.log(obj);
 
-    fetch('http://localhost:3001/api/store-products', {
-      method: 'POST',
+    fetch('http://localhost:3001/api/store-products/' + product.UPC, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -40,7 +40,7 @@ export default function EditStoreProductModal ({ handleClose, show, fetchData}) 
     })
     .then(res => {
       if(res.status === 200) {
-        alert('You successfully added new store product.')
+        alert('You successfully updated store product.')
         fetchData();
         handleClose();
       }
@@ -56,9 +56,9 @@ export default function EditStoreProductModal ({ handleClose, show, fetchData}) 
         <h2 className="mb-30">Add new Store Product</h2>
         <div className='d-flex justify-content-center '>
           <div>
-            <Input type={'number'} label={'Enter Product Id'} setQueryParam={setProductId}/>
-            <Input type={'number'} setQueryParam={setSellingPrice} label={'Enter Purchasing Price'}/>
-            <Input type={'number'} label={'Enter Products Number'} setQueryParam={setProductsNumber}/>
+            <Input value={product.id_product} placeholder={product.id_product} type={'number'} label={'Enter Product Id'} setQueryParam={setProductId}/>
+            <Input value={product.selling_price} placeholder={product.selling_price} type={'number'} setQueryParam={setSellingPrice} label={'Enter Purchasing Price'}/>
+            <Input value={product.products_number} placeholder={product.products_number} type={'number'} label={'Enter Products Number'} setQueryParam={setProductsNumber}/>
             <label>Is Promotional Product?</label>
             <select onChange={e => setPromotionalProduct(e.target.value)}>
               <option disabled selected>Choose</option>
@@ -78,8 +78,14 @@ export default function EditStoreProductModal ({ handleClose, show, fetchData}) 
 };
 
 function handlePrice(price, prom) {
-  if(prom)
-    return price + price * 0.2 + 0.2 * (price + price * 0.2);
-  else
-    return price + price * 0.3 + 0.2 * (price + price * 0.3);
+
+  const newPrice = parseInt(price)
+  if(prom == 1) {
+    let num = price + price * 0.2 + 0.2 * (price + price * 0.2);
+    return Math.round(num);
+  }
+  else {
+    let num = newPrice + newPrice * 0.3 + 0.2 * (newPrice + newPrice * 0.3);
+    return Math.round(num * 100 / 100);
+  }
 }
