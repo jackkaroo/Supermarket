@@ -11,10 +11,13 @@ const createCheckFromSales = async (data, id_employee) => {
       for (let storeProduct of storeProducts) {
         const {UPC, product_number} = storeProduct;
 
-        const {selling_price: productPrice} = await Store_Product.findByPk(UPC);
+        const storeProductObject  = await Store_Product.findByPk(UPC);
+        const {selling_price: productPrice} = storeProductObject;
 
         const selling_price = product_number * productPrice;
         sum_total += selling_price;
+
+        storeProductObject.increment('products_number', {by: -product_number});
 
         const newSale = {
           UPC,
