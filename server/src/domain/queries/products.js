@@ -13,8 +13,8 @@ const getProducts = () => {
 
 const addProduct = (body) => {
   return sequelize.query(
-    'INSERT INTO Products (id_product, category_number, product_name, characteristics ) ' +
-    `VALUES ("${body.id_product}", "${body.category_number}", "${body.product_name}", "${body.characteristics}" ) ` +
+    'INSERT INTO Products (category_number, product_name, characteristics ) ' +
+    `VALUES ("${body.category_number}", "${body.product_name}", "${body.characteristics}" ) ` +
     ';',
     {type: sequelize.QueryTypes.INSERT},
   );
@@ -23,7 +23,7 @@ const addProduct = (body) => {
 const editProduct = (id, body) => {
   return sequelize.query(
     'UPDATE Products  ' +
-    `SET id_product = "${body.id_product}", category_number =  "${body.category_number}",
+    `SET category_number =  "${body.category_number}",
      product_name = "${body.product_name}", characteristics = "${body.characteristics}"  ` +
     `WHERE id_product = ${id} ` +
     ';',

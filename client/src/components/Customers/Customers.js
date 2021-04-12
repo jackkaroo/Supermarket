@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import Customer from "./Customer"
 import Header from "../Header"
-import NewEmployeeModal from "../Employees/AddNewEmployee"
+import NewCustomerModal from "./AddNewCustomer"
 const exportCSVFile = require('../../helpers/csv');
 
 export default function Customers() {
@@ -35,9 +35,9 @@ export default function Customers() {
     const itemsFormatted = [];
     const headers = {
       card_number: 'card_id',
-      cust_surname: 'name',
-      cust_name: 'last_name',
-      cust_patronymic: 'patro',
+      cust_surname: 'last_name',
+      cust_name: 'name',
+      cust_patronymic: 'patronymic',
       phone_number: 'phone',
       city: 'city',
       street: 'str',
@@ -67,7 +67,7 @@ export default function Customers() {
       <Header/>
       <div className="header">
         <h2>Client Cards</h2>
-        <button onClick={makeReport}>Report</button>
+        <button className="btn btn-secondary" onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
@@ -75,8 +75,8 @@ export default function Customers() {
           </button>
         }
 
-        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}>
-        </NewEmployeeModal>
+        <NewCustomerModal fetchData={fetchData}
+                          show={showModal} handleClose={() => setShowModal(false)}/>
       </div>
       <table className="table table-hover table-bordered">
         <thead>
@@ -95,7 +95,8 @@ export default function Customers() {
         </tr>
         </thead>
         <tbody>
-        {customers.map((customer,index) => <Customer key={customer.card_number} customer={customer} index={index}/>)}
+        {customers.map((customer,index) =>
+          <Customer fetchData={fetchData} key={customer.card_number} customer={customer} index={index}/>)}
         </tbody>
       </table>
     </div>

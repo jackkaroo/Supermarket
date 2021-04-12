@@ -11,7 +11,6 @@ export default function EditProductModal ({ product, handleClose, show, fetchDat
   
   const saveChanges = () => {
     const obj = {
-      id_product: product.id_product,
       category_number: categoryNumber,
       product_name: productName,
       characteristics : characteristics

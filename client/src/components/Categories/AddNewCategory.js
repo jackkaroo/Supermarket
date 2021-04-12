@@ -1,17 +1,14 @@
 import '../../styles/Modal.css'
 import Input from "../Input/Input"
 import {useState} from "react"
-const { getFetchHeaders } = require("../../helpers/webApiHelper");
 
 export default function NewCategoryModal ({ handleClose, show, fetchData}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
-  const [number, setNumber] = useState('');
   const [name, setName] = useState('');
 
 
   const saveChanges = () => {
     const obj = {
-      category_number: number,
       category_name: name,
     }
     console.log(obj);
@@ -43,9 +40,7 @@ export default function NewCategoryModal ({ handleClose, show, fetchData}) {
         <h2 className="mb-30">Add new Category</h2>
         <div className='d-flex justify-content-center '>
           <div>
-            <Input type={'number'} label={'Enter Category Number'} setQueryParam={setNumber}/>
             <Input setQueryParam={setName} label={'Enter Category Name'}/>
-
             <div className="">
               <button className="btn btn-success" onClick={saveChanges}>Save</button>
               <button className="btn btn-danger" onClick={handleClose}>Close</button>

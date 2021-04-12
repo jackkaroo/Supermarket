@@ -15,7 +15,7 @@ export default function SeventeenthQuery( {path} ) {
       <div className="d-flex justify-content-between mb-30 align-items-center">
         <div>
           <h3>Запит 17</h3>
-          <h5>За UPC-товару знайти ціну продажу товару, кількість наявних одиниць товару.</h5>
+          <h5>Скласти список усіх постійних клієнтів, що мають карту клієнта із певним відсотком.</h5>
         </div>
         <div className="d-flex align-items-center">
           <Input  setQueryParam={setQueryParam} placeholder={'Enter percent'}/>

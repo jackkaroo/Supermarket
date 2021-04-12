@@ -43,6 +43,18 @@ const addEmployee = (body) => {
   );
 }
 
+const editEmployee = (id, body) => {
+  return sequelize.query(
+    'UPDATE Employees  ' +
+    `SET id_employee = "${body.id_employee}", email = "${body.email}", password = "${body.password}", 
+    empl_surname = "${body.empl_surname}", empl_name = "${body.empl_name}", empl_patronymic = "${body.empl_patronymic}", 
+    role = "${body.role}", salary = "${body.salary}", date_of_birth = "${body.date_of_birth}", date_of_start = "${body.date_of_start}",
+    phone_number = "${body.phone_number}", city = "${body.city}", street = "${body.street}", zip_code = "${body.zip_code}" ` +
+    `WHERE id_employee = ${id} ` +
+    ';',
+    {type: sequelize.QueryTypes.UPDATE},
+  );
+}
 
 const deleteEmployee = (id) => {
   console.log(id)
@@ -81,6 +93,7 @@ module.exports = {
   deleteEmployee,
   findEmployeeByEmail,
   findEmployeeById,
-  addEmployee
+  addEmployee,
+  editEmployee
 };
 

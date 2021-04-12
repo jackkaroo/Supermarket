@@ -1,11 +1,24 @@
-export default function Customer( {customer, index}) {
-  const editCustomer = () => {
-  }
+import {useState} from "react"
+import EditCustomerModal from "./EditCustomer"
+
+export default function Customer( {customer, index, fetchData}) {
+  const [showModal, setShowModal] = useState(false);
 
   const deleteCustomer = () => {
-    // fetch('http://localhost:3001/api/customers/' + customer.card_number, {
-    //   method: 'DELETE',
-    // });
+    fetch('http://localhost:3001/api/customers/' + customer.card_number, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+    .then(res => {
+      if(res.status === 200) fetchData()
+      else {
+        alert('You can not delete customer because of database integrity.')
+      }
+    })
   }
 
   return (
@@ -20,10 +33,25 @@ export default function Customer( {customer, index}) {
       <td>{customer.street}</td>
       <td>{customer.zip_code}</td>
       <td>{customer.percent}</td>
-      <td>
-        <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={editCustomer}/>
-        <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteCustomer}/>
-      </td>
+      {
+        localStorage.getItem("role") === "seller"
+        &&
+        <td>
+          <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={() => setShowModal(true)}/>
+          <EditCustomerModal customer={customer} fetchData={fetchData}
+                             show={showModal} handleClose={() => setShowModal(false)}/>
+        </td>
+      }
+      {
+        localStorage.getItem("role") === "manager"
+        &&
+        <td>
+          <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={() => setShowModal(true)}/>
+          <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteCustomer}/>
+          <EditCustomerModal customer={customer} fetchData={fetchData}
+                             show={showModal} handleClose={() => setShowModal(false)}/>
+        </td>
+      }
     </tr>
   );
 }

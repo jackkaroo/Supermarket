@@ -12,8 +12,8 @@ const getCategories = () => {
 
 const addCategory = (body) => {
   return sequelize.query(
-    'INSERT INTO Categories (category_number, category_name ) ' +
-    `VALUES ("${body.category_number}", "${body.category_name}" ) ` +
+    'INSERT INTO Categories (category_name ) ' +
+    `VALUES ("${body.category_name}" ) ` +
     ';',
     {type: sequelize.QueryTypes.INSERT},
   );
@@ -22,7 +22,7 @@ const addCategory = (body) => {
 const editCategory = (id, body) => {
   return sequelize.query(
     'UPDATE Categories  ' +
-    `SET category_number = "${body.category_number}", category_name = "${body.category_name}"  ` +
+    `SET category_name = "${body.category_name}"  ` +
     `WHERE category_number = ${id} ` +
     ';',
     {type: sequelize.QueryTypes.UPDATE},

@@ -11,6 +11,39 @@ const getCustomers = () => {
 }
 
 
+const addCustomer = (body) => {
+  return sequelize.query(
+    'INSERT INTO Customer_Cards (card_number, cust_surname, cust_name, cust_patronymic, ' +
+    'phone_number, city, street, zip_code, percent ) ' +
+    `VALUES ("${body.card_number}", "${body.cust_surname}", 
+     "${body.cust_name}", "${body.cust_patronymic}", "${body.phone_number}", "${body.city}", 
+     "${body.street}", "${body.zip_code}", "${body.percent}" ) ` +
+    ';',
+    {type: sequelize.QueryTypes.INSERT},
+  );
+}
+
+const editCustomer = (id, body) => {
+  return sequelize.query(
+    'UPDATE Customer_Cards  ' +
+    `SET card_number = "${body.card_number}", cust_surname = "${body.cust_surname}", 
+     cust_name = "${body.cust_name}", cust_patronymic = "${body.cust_patronymic}", phone_number = "${body.phone_number}",
+     city = "${body.city}", street = "${body.street}", zip_code = "${body.zip_code}", percent = "${body.percent}"  ` +
+    `WHERE card_number = "${id}" ` +
+    ';',
+    {type: sequelize.QueryTypes.UPDATE},
+  );
+}
+
+const deleteCustomer = (id) => {
+  console.log(id)
+  return sequelize.query(
+    'DELETE FROM Customer_Cards WHERE card_number = ' + `'${id}' ` +
+    ';',
+  );
+}
+
+
 // покупці які мають чек з продавцями з зарплатою більше 10 000
 const getCustomersHighPaidEmployees = () => {
   return sequelize.query(
@@ -51,7 +84,8 @@ const getCustomersCheckWithSeller = () => {
 }
 
 module.exports = {
-  getCustomersHighPaidEmployees,getCustomersCheckWithSeller,getCustomers
+  getCustomersHighPaidEmployees,getCustomersCheckWithSeller,getCustomers,
+  addCustomer,editCustomer,deleteCustomer
 };
 
 

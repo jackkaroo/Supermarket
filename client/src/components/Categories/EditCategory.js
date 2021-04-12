@@ -5,13 +5,11 @@ const { getFetchHeaders } = require("../../helpers/webApiHelper");
 
 export default function EditCategoryModal ({ category, handleClose, show, fetchData}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
-
   const [name, setName] = useState('');
 
 
   const saveChanges = () => {
     const obj = {
-      category_number: category.category_number,
       category_name: name,
     }
     console.log(obj);

@@ -4,7 +4,6 @@ import {useState} from "react"
 
 export default function NewProductModal ({ handleClose, show, fetchData}) {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
-  const [productId, setProductId] = useState('');
   const [productName, setProductName] = useState('');
   const [categoryNumber, setCategoryNumber] = useState('');
   const [characteristics, setCharacteristics] = useState('');
@@ -12,7 +11,6 @@ export default function NewProductModal ({ handleClose, show, fetchData}) {
 
   const saveChanges = () => {
     const obj = {
-      id_product: productId,
       category_number: categoryNumber,
       product_name: productName,
       characteristics : characteristics
@@ -46,7 +44,6 @@ export default function NewProductModal ({ handleClose, show, fetchData}) {
         <h2 className="mb-30">Add new Product</h2>
         <div className='d-flex justify-content-center '>
           <div>
-            <Input type={'number'} label={'Enter Product Id'} setQueryParam={setProductId}/>
             <Input type={'number'} setQueryParam={setCategoryNumber} label={'Enter Category Number'}/>
             <Input label={'Enter Product Name'} setQueryParam={setProductName}/>
             <Input setQueryParam={setCharacteristics} label={'Enter Characteristics'}/>
