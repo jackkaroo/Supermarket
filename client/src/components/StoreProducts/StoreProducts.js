@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import StoreProduct from "./StoreProduct"
 import Header from "../Header"
-import NewEmployeeModal from "../Employees/AddNewEmployee"
+import NewStoreProductModal from "./AddNewStoreProduct"
 const exportCSVFile = require('../../helpers/csv');
 
 export default function StoreProducts() {
@@ -39,7 +39,7 @@ export default function StoreProducts() {
       id_product: "prod_id",
       selling_price: "price",
       products_number: "quantity",
-      promotional_product: "prmotion"
+      promotional_product: "promotion"
     };
 
     storeProducts.forEach((item) => {
@@ -61,7 +61,7 @@ export default function StoreProducts() {
       <Header/>
       <div className="header">
         <h2>Store Products</h2>
-        <button onClick={makeReport}>Report</button>
+        <button className="btn btn-secondary" onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
@@ -69,8 +69,8 @@ export default function StoreProducts() {
           </button>
         }
 
-        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}>
-        </NewEmployeeModal>
+        <NewStoreProductModal fetchData={fetchData}
+                         show={showModal} handleClose={() => setShowModal(false)}/>
       </div>
       <table className="table table-hover table-bordered">
         <thead>
@@ -86,7 +86,8 @@ export default function StoreProducts() {
         </tr>
         </thead>
         <tbody>
-        {storeProducts.map((product,index) => <StoreProduct key={product.UPC} product={product} index={index}/>)}
+        {storeProducts.map((product,index) =>
+          <StoreProduct fetchData={fetchData} key={product.UPC} product={product} index={index}/>)}
         </tbody>
       </table>
     </div>
