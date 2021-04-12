@@ -2,11 +2,13 @@ import {useEffect, useState} from "react"
 import StoreProduct from "./StoreProduct"
 import Header from "../Header"
 import NewStoreProductModal from "./AddNewStoreProduct"
+import Input from "../Input/Input"
 const exportCSVFile = require('../../helpers/csv');
 
 export default function StoreProducts() {
   const [storeProducts, setStoreProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [cardNumber, setCardNumber] = useState('');
 
   const [productsToBuy, setProductsToBuy] = useState([]);
 
@@ -27,7 +29,7 @@ export default function StoreProducts() {
         Accept: 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-      body: JSON.stringify({storeProducts: productsToBuy})
+      body: JSON.stringify({storeProducts: productsToBuy, card_number: cardNumber})
     })
     .then(res => {
       if(res.status === 200) {
@@ -100,9 +102,16 @@ export default function StoreProducts() {
             Add new
           </button>
         }
-        <button onClick={createOrder}>
-          Create Order
-        </button>
+        {
+          localStorage.getItem("role") === "manager"
+          &&
+          <div className="d-flex align-items-center">
+            <button className="btn btn-success"  onClick={createOrder}>
+              Create Order
+            </button>
+            <Input setQueryParam={setCardNumber} placeholder={'Enter Card_number'}/>
+          </div>
+        }
 
         <NewStoreProductModal fetchData={fetchData}
                          show={showModal} handleClose={() => setShowModal(false)}/>

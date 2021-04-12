@@ -1,13 +1,24 @@
 import {handleDate} from "../../helpers/handleDate"
 
-export default function Check( {check, index}) {
+export default function Check( {check, index, fetchData}) {
   const editCheck = () => {
   }
 
-  const deleteCheck = () => {
-    // fetch('http://localhost:3001/api/checks/' + check.check_number, {
-    //   method: 'DELETE',
-    // });
+  const deleteChecks = () => {
+    fetch('http://localhost:3001/api/checks/' + check.check_number, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+    .then(res => {
+      if(res.status === 200) fetchData()
+      else {
+        alert('You can not delete checks because of database integrity.')
+      }
+    })
   }
 
   return (
@@ -19,10 +30,13 @@ export default function Check( {check, index}) {
       <td>{handleDate(check.print_date)}</td>
       <td>{check.sum_total}</td>
       <td>{check.vat}</td>
-      <td>
-        <img className="icon" alt="" src="https://imgur.com/gsqALsZ.png" onClick={editCheck} />
-        <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteCheck}/>
-      </td>
+      {
+        localStorage.getItem("role") === "manager"
+        &&
+        <td>
+          <img className="icon" alt="" src="https://imgur.com/ypHqYP0.png" onClick={deleteChecks}/>
+        </td>
+      }
     </tr>
   );
 }

@@ -63,15 +63,7 @@ export default function Checks() {
       <div className="header">
         <h2>Checks</h2>
         <button className="btn btn-secondary" onClick={makeReport}>Report</button>
-        {
-          localStorage.getItem("role") === "manager"
-          && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-            Add new
-          </button>
-        }
 
-        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}>
-        </NewEmployeeModal>
       </div>
       <table className="table table-hover table-bordered">
         <thead>
@@ -87,7 +79,8 @@ export default function Checks() {
         </tr>
         </thead>
         <tbody>
-        {checks.map((check,index) => <Check key={check.check_number} check={check} index={index}/>)}
+        {checks.map((check,index) =>
+          <Check fetchData={fetchData} key={check.check_number} check={check} index={index}/>)}
         </tbody>
       </table>
     </div>

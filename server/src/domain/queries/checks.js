@@ -36,7 +36,10 @@ const getChecksOfEmployee = (id_employee) => {
 
 
 const deleteCheck = (id) => {
-
+  return sequelize.query(
+    'DELETE FROM Checks WHERE check_number = ' + `'${id}' ` +
+    ';',
+  );
 }
 
 module.exports = {
