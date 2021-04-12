@@ -1,7 +1,7 @@
 import {useState} from "react"
 import EditStoreProductModal from "./EditStoreProduct"
 
-export default function StoreProduct( {product, index, fetchData}) {
+export default function StoreProduct( {product, index, fetchData, addProductToArray}) {
   const [showModal, setShowModal] = useState(false);
 
   const deleteProduct = () => {
@@ -21,10 +21,21 @@ export default function StoreProduct( {product, index, fetchData}) {
     })
   }
 
+  const handleClick = e => {
+
+    const obj = {
+      UPC: product.UPC,
+      product_number: parseInt(e.target.value)
+    }
+    addProductToArray(obj, index);
+  }
 
   return (
     <tr>
-      <td>{index + 1}</td>
+      <td>
+        {index + 1}
+        <input className='checkbox' type="number" onChange={handleClick}/>
+      </td>
       <td>{product.UPC}</td>
       <td>{product.UPC_prom}</td>
       <td>{product.id_product}</td>

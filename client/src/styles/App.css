@@ -46,3 +46,10 @@
     transform: rotate(360deg);
   }
 }
+
+.checkbox {
+  min-width: 70px;
+  width:20px;
+
+  margin-left: 10px;
+}

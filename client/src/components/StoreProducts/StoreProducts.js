@@ -8,6 +8,38 @@ export default function StoreProducts() {
   const [storeProducts, setStoreProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const [productsToBuy, setProductsToBuy] = useState([]);
+
+
+  const addProductToArray = (productObj) => {
+    // console.log(productObj)
+    const curProd = productsToBuy;
+    curProd.push(productObj);
+    setProductsToBuy(curProd);
+    console.log(productsToBuy);
+  }
+
+  const createOrder = () => {
+    fetch('http://localhost:3001/api/checks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({storeProducts: productsToBuy})
+    })
+    .then(res => {
+      if(res.status === 200) {
+        alert('You successfully added new check.')
+        fetchData();
+      }
+      else {
+        alert('You entered invalid information. Try again.')
+      }
+    })
+  }
+
   const fetchData = async () => {
     fetch('http://localhost:3001/api/store-products', {
       headers: {
@@ -68,6 +100,9 @@ export default function StoreProducts() {
             Add new
           </button>
         }
+        <button onClick={createOrder}>
+          Create Order
+        </button>
 
         <NewStoreProductModal fetchData={fetchData}
                          show={showModal} handleClose={() => setShowModal(false)}/>
@@ -87,7 +122,8 @@ export default function StoreProducts() {
         </thead>
         <tbody>
         {storeProducts.map((product,index) =>
-          <StoreProduct fetchData={fetchData} key={product.UPC} product={product} index={index}/>)}
+          <StoreProduct addProductToArray={addProductToArray}
+            fetchData={fetchData} key={product.UPC} product={product} index={index}/>)}
         </tbody>
       </table>
     </div>
