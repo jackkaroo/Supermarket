@@ -26,7 +26,7 @@ export default function EditEmployeeModal ({ employee, handleClose, show, fetchD
     const obj = {
       id_employee: employee.id_employee,
       email: email,
-      password: password,
+      password: employee.password,
       empl_surname: surname,
       empl_name: name,
       empl_patronymic: patronymic ,
@@ -68,29 +68,28 @@ export default function EditEmployeeModal ({ employee, handleClose, show, fetchD
         <h2 className="mb-30">Edit Employee</h2>
         <div className='d-flex justify-content-center '>
           <div>
-            <Input value={employee.empl_surname} setQueryParam={setSurname} placeholder={employee.empl_surname} label={'Enter Surname'}/>
-            <Input value={employee.empl_name} setQueryParam={setName} placeholder={employee.empl_name} label={'Enter Name'}/>
-            <Input value={employee.empl_patronymic} setQueryParam={setPatronymic} placeholder={employee.empl_patronymic} label={'Enter Patronymic'}/>
+            <Input value={employee.empl_surname} setQueryParam={setSurname} placeholder={employee.empl_surname} label={'Enter Surname ('+ employee.empl_surname + ')'}/>
+            <Input value={employee.empl_name} setQueryParam={setName} placeholder={employee.empl_name} label={'Enter Name (' + employee.empl_name + ')' }/>
+            <Input value={employee.empl_patronymic} setQueryParam={setPatronymic} placeholder={employee.empl_patronymic} label={'Enter Patronymic (' + employee.empl_patronymic + ')'}/>
             {/*<Input setQueryParam={setRole} placeholder={'Enter Role'}/>*/}
-            <label>Enter Role</label>
+            <label>{'Enter Role (' + employee.role + ')'}</label>
             <select onChange={e => setRole(e.target.value)}>
               <option disabled selected>Choose role</option>
               <option>Seller</option>
               <option>Manager</option>
             </select>
-            <Input value={Math.round(employee.salary)} type="number" setQueryParam={setSalary} placeholder={Math.round(employee.salary)} label={'Enter Salary'}/></div>
+            <Input value={Math.round(employee.salary)} type="number" setQueryParam={setSalary} placeholder={Math.round(employee.salary)} label={'Enter Salary (' + Math.round(employee.salary) + ')'}/></div>
           <div>
             {/*<input type="date" value={(employee.date_of_birth)}/>*/}
-            <Input type={'date'} value={(employee.date_of_birth)}  setQueryParam={setBirth} label={'Enter Date Birth'}/>
-            <Input type={'date'} value={(employee.date_of_start)} setQueryParam={setStart} label={'Enter Date Start'}/>
-            <Input value={employee.phone_number} setQueryParam={setPhone} placeholder={employee.phone_number} label={'Enter phone'}/>
-            <Input value={employee.city} setQueryParam={setCity} placeholder={employee.city} label={'Enter city'}/>
-            <Input value={employee.street} setQueryParam={setStreet} placeholder={employee.street} label={'Enter street'}/>
+            <Input type={'date'} value={(employee.date_of_birth)}  setQueryParam={setBirth} label={'Enter Date Birth (' + handleDate(employee.date_of_birth) + ')'}/>
+            <Input type={'date'} value={(employee.date_of_start)} setQueryParam={setStart} label={'Enter Date Start (' + handleDate(employee.date_of_start) + ')'}/>
+            <Input value={employee.phone_number} setQueryParam={setPhone} placeholder={employee.phone_number} label={'Enter phone (' + employee.phone_number + ')'}/>
+            <Input value={employee.city} setQueryParam={setCity} placeholder={employee.city} label={'Enter city (' + employee.city + ')'}/>
+            <Input value={employee.street} setQueryParam={setStreet} placeholder={employee.street} label={'Enter street (' + employee.street + ')'}/>
           </div>
           <div>
-            <Input value={employee.zip_code} setQueryParam={setZip} placeholder={employee.zip_code} label={'Enter zip code'}/>
-            <Input value={employee.email} type="email" setQueryParam={setEmail} placeholder={employee.email} label={'Enter email'}/>
-            <Input value={employee.password} type="password" setQueryParam={setPassword} label={'Enter Password'} placeholder={employee.password}/>
+            <Input value={employee.zip_code} setQueryParam={setZip} placeholder={employee.zip_code} label={'Enter zip code (' + employee.zip_code + ')'}/>
+            <Input value={employee.email} type="email" setQueryParam={setEmail} placeholder={employee.email} label={'Enter email (' + employee.email + ')'} />
             <div className="">
               <button className="btn btn-success" onClick={saveChanges}>Save</button>
               <button className="btn btn-danger" onClick={handleClose}>Close</button>

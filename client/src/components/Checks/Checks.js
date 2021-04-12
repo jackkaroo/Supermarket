@@ -62,7 +62,7 @@ export default function Checks() {
       <Header/>
       <div className="header">
         <h2>Checks</h2>
-        <button onClick={makeReport}>Report</button>
+        <button className="btn btn-secondary" onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           && <button className="btn btn-primary" onClick={() => setShowModal(true)}>

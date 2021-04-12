@@ -2,7 +2,7 @@ module.exports = async function(db) {
   await db.Employee.bulkCreate([
     {
       id_employee: 'id_empl_1' ,
-      email: '1',
+      email: 'polina@gmail.com',
       password: '1',
       empl_surname: 'Podopryhora',
       empl_name: 'Polina',
@@ -18,7 +18,7 @@ module.exports = async function(db) {
     },
     {
       id_employee: 'id_empl_2',
-      email: '2',
+      email: 'malyar@gmail.com',
       password: '2',
       empl_surname: 'Malyar',
       empl_name: 'Nastya',
@@ -34,7 +34,7 @@ module.exports = async function(db) {
     },
     {
       id_employee: 'id_empl_3' ,
-      email: '3',
+      email: 'dima@gmail.com',
       password: '3',
       empl_surname: 'Babenich',
       empl_name: 'Dima',
@@ -45,24 +45,40 @@ module.exports = async function(db) {
       date_of_start:  '2020-09-20',
       phone_number: '+380674476543',
       city: 'Mikolaiv' ,
-      street: 'Stalina 12' ,
-      zip_code: '7752'
+      street: 'Kolena 65' ,
+      zip_code: '34252'
     },
     {
       id_employee: 'id_empl_4' ,
       email: '4',
       password: '4',
-      empl_surname: 'Babenich4',
-      empl_name: 'Dima4',
-      empl_patronymic: 'Viktorovich4' ,
+      empl_surname: 'Petryk',
+      empl_name: 'Ivan',
+      empl_patronymic: 'Ivanovich' ,
       role: 'seller',
-      salary: 12000 ,
-      date_of_birth: '2001-01-17' ,
-      date_of_start:  '2020-09-20',
-      phone_number: '+380674476544',
-      city: 'Mikolaiv' ,
-      street: 'Stalina 14' ,
-      zip_code: '7754'
+      salary: 13000 ,
+      date_of_birth: '1999-12-17' ,
+      date_of_start:  '2020-09-22',
+      phone_number: '+380679976544',
+      city: 'Kyiv' ,
+      street: 'Khreshatyk 14' ,
+      zip_code: '78754'
+    },
+    {
+      id_employee: 'id_empl_5' ,
+      email: '5',
+      password: '5',
+      empl_surname: 'Vasylyk',
+      empl_name: 'Anna',
+      empl_patronymic: 'Yaroslavivna' ,
+      role: 'manager',
+      salary: 26000 ,
+      date_of_birth: '1973-12-17' ,
+      date_of_start:  '2018-09-22',
+      phone_number: '+380557876544',
+      city: 'Kyiv' ,
+      street: 'Mishygi 14' ,
+      zip_code: '38754'
     },
   ]);
 };
