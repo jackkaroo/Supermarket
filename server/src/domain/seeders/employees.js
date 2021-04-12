@@ -3,7 +3,7 @@ module.exports = async function(db) {
     {
       id_employee: 'id_empl_1' ,
       email: 'polina@gmail.com',
-      password: '1',
+      password: 'polina',
       empl_surname: 'Podopryhora',
       empl_name: 'Polina',
       empl_patronymic: 'Romanivna' ,
@@ -19,7 +19,7 @@ module.exports = async function(db) {
     {
       id_employee: 'id_empl_2',
       email: 'malyar@gmail.com',
-      password: '2',
+      password: 'nastya',
       empl_surname: 'Malyar',
       empl_name: 'Nastya',
       empl_patronymic: 'Vitaliivna' ,

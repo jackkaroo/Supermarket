@@ -34,7 +34,11 @@ export default function StoreProduct( {product, index, fetchData, addProductToAr
     <tr>
       <td>
         {index + 1}
-        <input className='checkbox' type="number" onChange={handleClick}/>
+        {
+          localStorage.getItem("role") === "manager"
+          &&
+          <input className='checkbox' type="number" onChange={handleClick}/>
+        }
       </td>
       <td>{product.UPC}</td>
       <td>{product.UPC_prom}</td>

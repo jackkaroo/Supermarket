@@ -9,10 +9,13 @@ const {
   getCustomersByPercent, getProductsByCategorySorted, getAllProducts
 } = require('../../../domain/queries/manager');
 
+const {sellerMiddleware} = require('../../middlewares/auth');
+
+
 const seller = express();
 
 seller
-.get('/checks-by-seller-by-time/:surname', async (req, res, next) => {
+.get('/checks-by-seller-by-time/:surname',sellerMiddleware, async (req, res, next) => {
   try {
     const {surname} = req.params;
     const {dateFrom, dateTo} = req.query;
@@ -23,7 +26,7 @@ seller
     next(error);
   }
 })
-.get('/info-by-check/:checkId', async (req, res, next) => {
+.get('/info-by-check/:checkId',sellerMiddleware, async (req, res, next) => {
   try {
     const {checkId} = req.params;
     const data = await getInfoByCheck(checkId);
@@ -32,7 +35,7 @@ seller
     next(error);
   }
 })
-.get('/info-product-by-check/:checkId', async (req, res, next) => {
+.get('/info-product-by-check/:checkId',sellerMiddleware, async (req, res, next) => {
   try {
     const {checkId} = req.params;
     const data = await getProductInfoByCheck(checkId);
@@ -41,7 +44,7 @@ seller
     next(error);
   }
 })
-.get('/customer-info-by-surname/:surname', async (req, res, next) => {
+.get('/customer-info-by-surname/:surname',sellerMiddleware, async (req, res, next) => {
   try {
     const {surname} = req.params;
     const data = await getCustomerInfoBySurname(surname);
@@ -50,7 +53,7 @@ seller
     next(error);
   }
 })
-.get('/customers-by-percent/:percent', async (req, res, next) => {
+.get('/customers-by-percent/:percent',sellerMiddleware, async (req, res, next) => {
   try {
     const {percent} = req.params;
     const data = await getCustomersByPercent(percent);
@@ -59,7 +62,7 @@ seller
     next(error);
   }
 })
-.get('/products-by-category-sorted/:name', async (req, res, next) => {
+.get('/products-by-category-sorted/:name',sellerMiddleware, async (req, res, next) => {
   try {
     const {name} = req.params;
     const data = await getProductsByCategorySorted(name);
@@ -68,7 +71,7 @@ seller
     next(error);
   }
 })
-.get('/products', async (req, res, next) => {
+.get('/products',sellerMiddleware, async (req, res, next) => {
   try {
     const data = await getAllProducts();
     res.json(data);
@@ -76,7 +79,7 @@ seller
     next(error);
   }
 })
-.get('/employee-info-by-id/:id', async (req, res, next) => {
+.get('/employee-info-by-id/:id',sellerMiddleware, async (req, res, next) => {
   try {
     const {id} = req.params;
     const data = await getEmployeeInfoById(id);
@@ -85,7 +88,7 @@ seller
     next(error);
   }
 })
-.get('/info-by-upc/:upc', async (req, res, next) => {
+.get('/info-by-upc/:upc',sellerMiddleware, async (req, res, next) => {
   try {
     const {upc} = req.params;
     const data = await getProductInfoByUpc(upc);
@@ -94,7 +97,7 @@ seller
     next(error);
   }
 })
-.get('/prom-products-by-quantity', async (req, res, next) => {
+.get('/prom-products-by-quantity',sellerMiddleware, async (req, res, next) => {
   try {
     const {upc} = req.params;
     const data = await getPromProductsByQuantity(upc);
@@ -103,7 +106,7 @@ seller
     next(error);
   }
 })
-.get('/prom-products-by-name', async (req, res, next) => {
+.get('/prom-products-by-name',sellerMiddleware, async (req, res, next) => {
   try {
     const {upc} = req.params;
     const data = await getPromProductsByName(upc);
@@ -112,7 +115,7 @@ seller
     next(error);
   }
 })
-.get('/not-prom-products-by-quantity', async (req, res, next) => {
+.get('/not-prom-products-by-quantity',sellerMiddleware, async (req, res, next) => {
   try {
     const {upc} = req.params;
     const data = await getNotPromProductsByQuantity(upc);
@@ -121,7 +124,7 @@ seller
     next(error);
   }
 })
-.get('/not-prom-products-by-name', async (req, res, next) => {
+.get('/not-prom-products-by-name',sellerMiddleware, async (req, res, next) => {
   try {
     const {upc} = req.params;
     const data = await getNotPromProductsByName(upc);
