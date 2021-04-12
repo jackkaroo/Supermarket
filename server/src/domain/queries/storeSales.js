@@ -1,9 +1,10 @@
+const crypto = require('crypto');
 const {sequelize} = require('../models');
 const {Store_Product} = require('../models')
 
 const createCheckFromSales = async (data, id_employee) => {
   await sequelize.transaction(async (_) => {
-      const check_number = Math.random().toString(36).substring(10);
+      const check_number = crypto.randomBytes(10).toString('hex');
 
       let sum_total = 0;
       const sales = [];
