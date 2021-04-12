@@ -52,7 +52,7 @@ export default function EditEmployeeModal ({ employee, handleClose, show, fetchD
     })
     .then(res => {
       if(res.status === 200) {
-        alert('You successfully added new employee.')
+        alert('You successfully updated employee.')
         fetchData();
         handleClose();
       }

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react"
 import Category from "./Category"
 import CategoryHeader from "./CategoryHeader"
 import Header from "../Header"
-import NewEmployeeModal from "../Employees/AddNewEmployee"
+import NewCategoryModal from "./AddNewCategory"
 const exportCSVFile = require('../../helpers/csv');
 
 export default function Categories() {
@@ -54,7 +54,7 @@ export default function Categories() {
       <Header/>
       <div className="header">
         <h2>Categories</h2>
-        <button onClick={makeReport}>Report</button>
+        <button className="btn btn-secondary" onClick={makeReport}>Report</button>
         {
           localStorage.getItem("role") === "manager"
           && <button className="btn btn-primary" onClick={() => setShowModal(true)}>
@@ -62,13 +62,14 @@ export default function Categories() {
           </button>
         }
 
-        <NewEmployeeModal show={showModal} handleClose={() => setShowModal(false)}>
-        </NewEmployeeModal>
+        <NewCategoryModal fetchData={fetchData}
+          show={showModal} handleClose={() => setShowModal(false)}/>
       </div>
       <table className="table table-hover table-bordered">
         <CategoryHeader/>
         <tbody>
-        {categories.map((category,index) => <Category key={index} category={category} index={index}/>)}
+        {categories.map((category,index) =>
+          <Category fetchData={fetchData} key={index} category={category} index={index}/>)}
         </tbody>
       </table>
     </div>

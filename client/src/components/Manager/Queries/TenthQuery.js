@@ -8,7 +8,13 @@ export default function TenthQuery( {path} ) {
   const [clickedCheck, setClickedCheck] = useState(false);
 
   const getByQuantity = () => {
-    fetch(path + '/not-prom-products-by-quantity')
+    fetch(path + '/not-prom-products-by-quantity', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
     .then((response) => {
       return response.json();
     })
@@ -19,7 +25,13 @@ export default function TenthQuery( {path} ) {
   }
 
   const getByName = () => {
-    fetch(path + '/not-prom-products-by-name')
+    fetch(path + '/not-prom-products-by-name', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
     .then((response) => {
       return response.json();
     })

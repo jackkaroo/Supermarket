@@ -10,6 +10,33 @@ const getCategories = () => {
   );
 }
 
+const addCategory = (body) => {
+  return sequelize.query(
+    'INSERT INTO Categories (category_number, category_name ) ' +
+    `VALUES ("${body.category_number}", "${body.category_name}" ) ` +
+    ';',
+    {type: sequelize.QueryTypes.INSERT},
+  );
+}
+
+const editCategory = (id, body) => {
+  return sequelize.query(
+    'UPDATE Categories  ' +
+    `SET category_number = "${body.category_number}", category_name = "${body.category_name}"  ` +
+    `WHERE category_number = ${id} ` +
+    ';',
+    {type: sequelize.QueryTypes.UPDATE},
+  );
+}
+
+const deleteCategory = (id) => {
+  console.log(id)
+  return sequelize.query(
+    'DELETE FROM Categories WHERE category_number = ' + `'${id}' ` +
+    ';',
+  );
+}
+
 // get names of all categories that have store products
 const getCategoryNamesOfStoreProducts = () => {
   return sequelize.query(
@@ -22,6 +49,6 @@ const getCategoryNamesOfStoreProducts = () => {
 }
 
 module.exports = {
-  getCategoryNamesOfStoreProducts, getCategories
+  getCategoryNamesOfStoreProducts, getCategories, addCategory, editCategory, deleteCategory
 };
 
