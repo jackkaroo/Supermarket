@@ -1,4 +1,5 @@
 const {sequelize} = require('../models');
+const crypto = require('crypto');
 
 const findEmployeeById = (id) => {
   return sequelize.query(
@@ -30,27 +31,37 @@ const getEmployees = () => {
 }
 
 const addEmployee = (body) => {
+  const {password} = body;
+  const {salt, passwordHash} = createPasswordData(password);
   return sequelize.query(
-    'INSERT INTO Employees (id_employee, email, password, empl_surname, empl_name, empl_patronymic, ' +
-    'role, salary, date_of_birth, date_of_start, phone_number, ' +
-    'city, street, zip_code ) ' +
-    `VALUES ("${body.id_employee}", "${body.email}", "${body.password}", 
+    'INSERT INTO Employees (id_employee, email, empl_surname, empl_name, empl_patronymic, role, salary,' +
+    ' date_of_birth, date_of_start, phone_number, city, street, zip_code, salt, passwordHash) ' +
+    `VALUES ("${body.id_employee}", "${body.email}", 
     "${body.empl_surname}", "${body.empl_name}", "${body.empl_patronymic}", 
     "${body.role}", "${body.salary}", "${body.date_of_birth}", "${body.date_of_start}",
-    "${body.phone_number}", "${body.city}", "${body.street}", "${body.zip_code}" ) ` +
+    "${body.phone_number}", "${body.city}", "${body.street}", "${body.zip_code}", "${salt}", "${passwordHash}" ) ` +
     ';',
     {type: sequelize.QueryTypes.INSERT},
   );
 }
 
 const editEmployee = (id, body) => {
-  return sequelize.query(
-    'UPDATE Employees  ' +
-    `SET id_employee = "${body.id_employee}", email = "${body.email}", password = "${body.password}", 
+  const {password} = body;
+  let baseQuery = `SET id_employee = "${body.id_employee}", email = "${body.email}", 
     empl_surname = "${body.empl_surname}", empl_name = "${body.empl_name}", empl_patronymic = "${body.empl_patronymic}", 
     role = "${body.role}", salary = "${body.salary}", date_of_birth = "${body.date_of_birth}", date_of_start = "${body.date_of_start}",
-    phone_number = "${body.phone_number}", city = "${body.city}", street = "${body.street}", zip_code = "${body.zip_code}" ` +
-    `WHERE id_employee = ${id} ` +
+    phone_number = "${body.phone_number}", city = "${body.city}", street = "${body.street}", zip_code = "${body.zip_code}" `;
+
+  if (password) {
+    const {salt, passwordHash} = createPasswordData(password);
+    const insertString = `, salt = "${salt}", passwordHash = "${passwordHash}" `
+    baseQuery = baseQuery.concat(' ', insertString);
+  }
+
+  return sequelize.query(
+    'UPDATE Employees  ' +
+    baseQuery +
+    `WHERE id_employee = "${id}" ` +
     ';',
     {type: sequelize.QueryTypes.UPDATE},
   );
@@ -85,6 +96,27 @@ const getEmployeesCheckCustomerKyiv = () => {
     ';',
     {type: sequelize.QueryTypes.SELECT},
   );
+}
+
+const SALT_LENGTH = 16;
+const KEY_LENGTH  = 64;
+
+const _generateSalt = () => {
+  const salt = crypto.randomBytes(SALT_LENGTH);
+
+  return salt.toString('hex');
+}
+
+const _hashPassword = (password, salt) => {
+  const hash = crypto.scryptSync(password, salt, KEY_LENGTH);
+
+  return hash.toString('hex');
+}
+
+const createPasswordData = (password) => {
+  const salt = _generateSalt();
+  const passwordHash = _hashPassword(password, salt);
+  return {salt, passwordHash}
 }
 
 module.exports = {

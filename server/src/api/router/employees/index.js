@@ -1,7 +1,6 @@
 const express = require('express');
-const {getEmployeesCheckCustomerKyiv, getEmployees,addEmployee,
+const {getEmployeesCheckCustomerKyiv, getEmployees,addEmployee,editEmployee,
   deleteEmployee} = require('../../../domain/queries/employees');
-const {Employee} = require('../../../domain/models');
 
 const employees = express();
 
@@ -17,7 +16,7 @@ employees
   .post('/', async (req, res, next) => {
     console.log(req.body)
     try {
-      const data = await Employee.create(req.body);
+      const data = await addEmployee(req.body);
       res.json(data);
     } catch (error) {
       next(error);
@@ -27,7 +26,7 @@ employees
     const {id} = req.params;
     console.log(req.body)
     try {
-      const data = await Employee.update(req.body, {where: {id_employee:id}});
+      const data = await editEmployee(id, req.body);
       res.json(data);
     } catch (error) {
       next(error);
@@ -50,7 +49,6 @@ employees
       next(error);
     }
   })
-
 ;
 
 module.exports = employees;
